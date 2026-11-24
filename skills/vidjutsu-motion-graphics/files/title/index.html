@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* The page is the film's frame: 1920x1080. Inter ships with the renderer;
+     any other font goes in this folder and loads with @font-face. */
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0b0b0b; }
+  body { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; color: #f5f5f5; }
+  #glow { position: absolute; inset: 0;
+          background: radial-gradient(1000px 760px at 28% 50%, #161616 0%, #0b0b0b 72%); }
+  #card { position: absolute; left: 160px; right: 160px; top: 0; bottom: 0;
+          display: flex; flex-direction: column; justify-content: center; transform-origin: left center; }
+  #kicker { font-size: 24px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+            color: #8a8a8a; margin-bottom: 28px; }
+  #title { font-size: 136px; font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; margin: 0; }
+  /* Each line is a mask: words rise into it and leave through its top.
+     The padding keeps ascenders and descenders inside the mask. */
+  .line { display: block; overflow: hidden; padding: 0.06em 0 0.1em; margin: -0.06em 0 -0.1em; }
+  .word { display: inline-block; margin-right: 0.22em; }
+  #subtitle { font-size: 38px; font-weight: 400; color: #a3a3a3; margin-top: 36px; max-width: 1100px;
+              line-height: 1.35; letter-spacing: -0.005em; }
+</style>
+</head>
+<body>
+<div id="glow"></div>
+<div id="card">
+  <div id="kicker"></div>
+  <h1 id="title"></h1>
+  <div id="subtitle"></div>
+</div>
+<script>
+  // ---- Change these. One scene = one title card; copy the folder for more.
+  const CONTENT = {
+    kicker: "Episode 4",
+    title: ["The week agents", "learned to edit"],   // one string per line
+    subtitle: "What changed, what broke, and what to try first.",
+  };
+  const SECONDS = 5;                 // match "seconds" for this scene in film.json
+  const OUT = SECONDS - 0.6;         // the exit starts here
+
+  // ---- Easing: pure functions of a 0..1 progress.
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const span = (t, from, to) => clamp((t - from) / (to - from));   // 0 before, 1 after
+  const outQuint = (p) => 1 - Math.pow(1 - p, 5);                   // for things arriving
+  const inCubic = (p) => p * p * p;                                 // for things leaving
+
+  // ---- Build the elements once. Drawing never adds or removes them.
+  const card = document.getElementById("card");
+  const kicker = document.getElementById("kicker");
+  const title = document.getElementById("title");
+  const subtitle = document.getElementById("subtitle");
+  kicker.textContent = CONTENT.kicker;
+  subtitle.textContent = CONTENT.subtitle;
+  const words = [];
+  for (const text of CONTENT.title) {
+    const line = document.createElement("span");
+    line.className = "line";
+    for (const w of text.split(" ")) {
+      const word = document.createElement("span");
+      word.className = "word";
+      word.textContent = w;
+      line.appendChild(word);
+      words.push(word);
+    }
+    title.appendChild(line);
+  }
+
+  // ---- Draw time t (seconds). Every property is set from t alone, every
+  // frame, so any frame can be drawn first, last or twice.
+  // In: kicker, words, subtitle. Out: subtitle and kicker fade, then the words
+  // leave up through the mask, the last one gone by SECONDS - 0.05.
+  window.render = (t) => {
+    const fade = inCubic(span(t, OUT - 0.1, OUT + 0.2));
+
+    const k = outQuint(span(t, 0.1, 0.8));
+    kicker.style.opacity = k * (1 - fade);
+    kicker.style.transform = `translateY(${(1 - k) * 16}px)`;
+
+    words.forEach((word, i) => {
+      const inP = outQuint(span(t, 0.3 + i * 0.06, 1.2 + i * 0.06));
+      const outP = inCubic(span(t, OUT + 0.1 + i * 0.03, OUT + 0.35 + i * 0.03));
+      word.style.transform = `translateY(${(1 - inP) * 120 - outP * 120}%)`;
+    });
+
+    const s = outQuint(span(t, 0.9, 1.6));
+    subtitle.style.opacity = s * (1 - fade);
+    subtitle.style.transform = `translateY(${(1 - s) * 14}px)`;
+
+    // A slow 1.5% push across the whole card, so the hold never freezes.
+    card.style.transform = `scale(${1 + 0.015 * span(t, 0.3, SECONDS)})`;
+  };
+  window.render(0);
+</script>
+</body>
+</html>
