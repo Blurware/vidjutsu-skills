@@ -50,7 +50,10 @@ Then follow the recipe that fits, with its steps and defaults:
   with its starter files);
 - making or changing the person's own look (colors, fonts, title card, lower
   third) and saving it: **vidjutsu-style**
-  (https://vidjutsu.ai/.well-known/skills/vidjutsu-style/SKILL.md).
+  (https://vidjutsu.ai/.well-known/skills/vidjutsu-style/SKILL.md);
+- posting or scheduling the finished videos to TikTok, Instagram or YouTube:
+  **vidjutsu-schedule**
+  (https://vidjutsu.ai/.well-known/skills/vidjutsu-schedule/SKILL.md).
 
 If they're installed as skills, use them; otherwise read them at those links.
 The recipe is the method; this skill only decides what goes in and what comes
@@ -127,8 +130,8 @@ them both and stop.
 Changes come back as words ("too tight", "lose the intro") or as comments in
 the web app. Make each with `edit` (or `undo` a change from `history`), render
 again and send the new link. For a back-and-forth on comments, follow the
-review loop from `review_skill`. Post only when the person asks: the
-clean-cut recipe's "Post the cut" section says how.
+review loop from `review_skill`. Post only when the person asks, and then
+follow vidjutsu-schedule: it shows the calendar and waits for a yes.
 
 ## Rules
 

@@ -88,30 +88,10 @@ and check again. Report measured values, never a score.
 ## Post the cut
 
 Skip this unless the person asked to post. Posting puts the video in public,
-so post only the export the person approved, with the caption and time they
-gave or agreed to.
-
-1. `social_accounts` lists the connected accounts. If the account they want is
-   missing, `connect_account` with its `platform` (`tiktok`, `instagram` or
-   `youtube`), send the person the `url` to sign in (or `handoff_url`, a QR
-   code for their phone; both last about 30 minutes), and wait for them before calling `social_accounts` again. An account with a
-   `reconnect_url` needs the same: send them that link.
-2. `schedule_post` with `media: {job_id}` (the export's render job), the
-   `caption`, the account ids in `accounts`, and `at` (an ISO time with a
-   zone) when they gave one; leave `at` out to post now. A YouTube account
-   needs a title (up to 100 letters) and explicit visibility: send
-   `{id, options: {title, visibility}}` with `private`, `unlisted`, or `public`.
-   If the person has not told you which, ask before scheduling; never assume.
-   Send an `idempotency_key` so a retry doesn't post twice.
-3. `get_post` shows where it is. Tell the person the time it goes out, or,
-   once it is `published`, each target's `url`. A post `pending_approval`
-   waits for the owner to review and approve that version in the VidJutsu web app;
-   `paused_unpaid` waits for a payment; a `failed` or `partial` post's targets
-   carry the `error` to report. `post_stats` gives the numbers later, if they
-   ask.
-
-A 402 `upgrade_required` means posting isn't in their plan: give them the
-`upgrade_url` and stop.
+so post only the export the person approved. Follow **vidjutsu-schedule**
+(https://vidjutsu.ai/.well-known/skills/vidjutsu-schedule/SKILL.md): it finds
+the accounts, writes the captions, shows the calendar and waits for a yes
+before anything is scheduled.
 
 ## Styles
 
