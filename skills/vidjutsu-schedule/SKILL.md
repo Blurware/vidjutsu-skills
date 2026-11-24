@@ -25,7 +25,7 @@ anything.
 | `times` | 12:00 and 18:00 | Local times to post at, in the person's time zone. Ask the zone once if you don't know it. |
 | `order` | the order given, else newest render first | Which video goes out first. |
 | TikTok | `privacy_level` public, comments on, `ai_generated` false | Change only when the person says. |
-| YouTube | `visibility` public, title from the hook | Title up to 100 characters. |
+| YouTube | `visibility` public, title from the hook | Title up to 100 letters. |
 | Instagram | `ai_generated` false | |
 
 ## Steps
