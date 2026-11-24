@@ -3,7 +3,7 @@ name: vidjutsu-motion-graphics
 description: Make title cards, lower thirds and animated segments with VidJutsu, written as HTML scenes and drawn in the cloud, then place them on a project's timeline. Use when the person asks for motion graphics, a title card, a lower third or an animated segment. Ships starter files (a title card and a lower third). Needs the VidJutsu MCP server or CLI.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   creator: VidJutsu
 ---
 
@@ -61,6 +61,11 @@ the apps cover: the top 328 pixels, the bottom 672 and 120 at each side.
 7. **No inset shadows.** `box-shadow: inset ...` on a box that is clipped or
    moving draws a shade differently from one run to the next, and the job
    fails. For a hairline edge use a `border` instead.
+8. **Give moving things a layer from the start.** Every element `render(t)`
+   moves or fades gets `will-change: transform, opacity` in its CSS (the
+   starter files do this). Without it Chrome layers an element only while it
+   moves, its text comes out a shade different with and without the layer,
+   and the job stops as not repeatable.
 
 Libraries: put the file in the folder, then hand the animation to the frozen
 helper, which sets `render(t)` for you: `vidjutsu.gsap(timeline)` (GSAP and
@@ -84,12 +89,16 @@ Noto Color Emoji are installed. Any other font goes in the folder with
    film.json, title/index.html and lower-third/index.html (also at
    https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics/files/film.json
    and the same path for the two pages).
+   When the person names a saved style (made with vidjutsu-style), start from
+   the workspace `style-<name>` instead: `graphics_read` its pages and copy
+   them, with any font or logo files by the hashes its `graphics_list` gives.
    `graphics_list` the workspace first: if it already has files, change those
    instead of starting over. Otherwise `graphics_write` them all as `write`
    entries in one call. For more cards of a kind, write a copy of the folder
    under a new name (title-2/index.html) and add a scene for it.
-3. **Change the words and the look.** Each page starts with a CONTENT block
-   and SECONDS: change those with `graphics_write` `patch` entries (find must
+3. **Change the words and the look.** Each page starts with a LOOK block of
+   CSS variables (colors, font, corner radius; keep them the same in every
+   scene) and a CONTENT block and SECONDS: change those with `graphics_write` `patch` entries (find must
    occur exactly once), keeping SECONDS equal to the scene's seconds in the
    film. Send the bundle you read as `expected_bundle`; on a 409, read again
    with `graphics_list` and redo the change on top. Brand fonts, logos or

@@ -47,7 +47,10 @@ Then follow the recipe that fits, with its steps and defaults:
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-clean-cut/SKILL.md);
 - title cards, lower thirds, animated segments: **vidjutsu-motion-graphics**
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics/SKILL.md,
-  with its starter files).
+  with its starter files);
+- making or changing the person's own look (colors, fonts, title card, lower
+  third) and saving it: **vidjutsu-style**
+  (https://vidjutsu.ai/.well-known/skills/vidjutsu-style/SKILL.md).
 
 If they're installed as skills, use them; otherwise read them at those links.
 The recipe is the method; this skill only decides what goes in and what comes
@@ -95,10 +98,10 @@ Give each edit a one-line `summary`; it is what history shows.
   `style {id, title?, cards?, stamps?, transitions?}`. Read its `guide`
   first: text that doesn't fit is refused, never shrunk. Put a stamp on a
   word by using that word's `start` from `timeline_words`.
-- **A saved look** (one the person made before): it lives in a graphics
-  workspace. `graphics_list` and `graphics_read` show it; reuse its scenes
-  with new words, `make_graphics`, then place the film on an upper video track
-  with `add_media` + `insert_clip`.
+- **A saved look** (one the person made with vidjutsu-style): it lives in the
+  graphics workspace `style-<name>`. vidjutsu-motion-graphics starts from it
+  with new words, renders, and places the film. When they ask for a look they
+  don't have yet, make one with vidjutsu-style first.
 - **Captions**: `render` with `captions {on: true}` when they ask, or for
   clips meant for social feeds.
 - If the person names a look you don't have, say so in one line and use the

@@ -10,6 +10,7 @@ with VidJutsu's tools.
 | [`vidjutsu-edit`](skills/vidjutsu-edit/SKILL.md) | Raw footage in, finished videos out: reads the ask, brings the footage in, picks a recipe, checks and renders. Say `/vidjutsu-edit`. |
 | [`vidjutsu-clean-cut`](skills/vidjutsu-clean-cut/SKILL.md) | Raw talking-head takes in, a tight cut out: dead air, false starts and repeated lines removed, then checked and exported. |
 | [`vidjutsu-motion-graphics`](skills/vidjutsu-motion-graphics/SKILL.md) | Title cards, lower thirds and animated segments written as HTML scenes and drawn in the cloud, with starter files. |
+| [`vidjutsu-style`](skills/vidjutsu-style/SKILL.md) | Your brand as a saved look (colors, fonts, a title card and a lower third), shown as a sample and reused in every edit. |
 
 ## Install
 
@@ -17,13 +18,9 @@ with VidJutsu's tools.
 npx skills add https://vidjutsu.ai
 ```
 
-That needs no GitHub sign-in: vidjutsu.ai publishes a pinned copy of this
-repository at `https://vidjutsu.ai/.well-known/skills/index.json`. To install
-straight from GitHub instead:
-
-```sh
-npx skills add Blurware/vidjutsu-skills
-```
+That installs every skill below, with no GitHub sign-in: vidjutsu.ai
+publishes a pinned copy of this repository at
+`https://vidjutsu.ai/.well-known/skills/index.json`.
 
 No terminal? Tell your agent: `Read https://vidjutsu.ai/skill.md and save it as
 a skill named vidjutsu-edit.`
