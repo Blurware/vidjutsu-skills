@@ -1,0 +1,11 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "subframes": 2,
+  "effects": [{ "type": "grain", "amount": 0.1 }],
+  "scenes": [
+    { "dir": "title", "seconds": 5 },
+    { "dir": "lower-third", "seconds": 6 }
+  ]
+}
