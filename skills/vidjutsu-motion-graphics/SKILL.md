@@ -58,6 +58,9 @@ the apps cover: the top 328 pixels, the bottom 672 and 120 at each side.
    property to its plain resting value (a clip-path to "none", not an inset of
    0%), or its edge can be drawn a shade differently depending on the frame
    before, and the job stops as not repeatable.
+7. **No inset shadows.** `box-shadow: inset ...` on a box that is clipped or
+   moving draws a shade differently from one run to the next, and the job
+   fails. For a hairline edge use a `border` instead.
 
 Libraries: put the file in the folder, then hand the animation to the frozen
 helper, which sets `render(t)` for you: `vidjutsu.gsap(timeline)` (GSAP and
@@ -107,7 +110,8 @@ Noto Color Emoji are installed. Any other font goes in the folder with
    and silent: a card covers everything under it while it plays. A lower third
    over a take is drawn with that stretch of the take inside its scene (the
    lower-third page explains FOOTAGE_FPS and extract) and placed on a track
-   above the take for the same stretch. Video `insert_clip` needs a `layout`;
+   above the take for the same stretch (a new project has only `v1` and
+   `a1`: add one in the same edit with `add_track {id: "v2", kind: "video"}`). Video `insert_clip` needs a `layout`;
    full frame is `{x: 0, y: 0, width: 1000, height: 1000}`.
 6. **Check.** Run the checks below and fix what fails.
 7. **Hand it over.** Give the person `output.watch_url` from
