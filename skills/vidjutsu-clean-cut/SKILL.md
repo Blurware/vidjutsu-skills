@@ -3,7 +3,7 @@ name: vidjutsu-clean-cut
 description: Cut raw talking-head takes into a tight video with VidJutsu. Use when the person has one or more recordings of someone talking (camera, or screen plus camera) and wants dead air, false starts and repeated lines removed, checked and exported. Needs the VidJutsu MCP server or CLI.
 license: Apache-2.0
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   creator: VidJutsu
 ---
 
@@ -122,6 +122,10 @@ is used. Pass it to `render` as `style`, for example
 seconds of the picture while the sound runs on, so either let the voice start
 under it or open a gap first with an `insert_gap` edit. Put a stamp on a word
 by using that word's own `start` from `timeline_words` as its `at`.
+
+When the person has a saved look of their own (made with vidjutsu-style, kept
+in the graphics workspace `style-<name>`) and asks for it, make the title card
+from it with vidjutsu-motion-graphics instead of a built-in style.
 
 ## After the first export
 

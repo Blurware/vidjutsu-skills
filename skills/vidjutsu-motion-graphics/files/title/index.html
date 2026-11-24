@@ -3,22 +3,40 @@
 <head>
 <meta charset="utf-8">
 <style>
+  /* ---- LOOK: the style. vidjutsu-style writes these; change them together
+     in every scene so the cards match. */
+  :root {
+    --font: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --bg: #0b0b0b;          /* title card background */
+    --bg-glow: #161616;     /* the soft light behind the title */
+    --text: #f5f5f5;        /* titles and names */
+    --muted: #a3a3a3;       /* subtitles and roles */
+    --accent: #8a8a8a;      /* the kicker above the title */
+    --panel: rgba(14,14,14,0.94);       /* the lower third's box */
+    --panel-edge: rgba(255,255,255,0.08);
+    --radius: 12px;
+  }
   /* The page is the film's frame: 1920x1080. Inter ships with the renderer;
      any other font goes in this folder and loads with @font-face. */
-  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0b0b0b; }
-  body { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; color: #f5f5f5; }
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+  body { font-family: var(--font); color: var(--text); }
   #glow { position: absolute; inset: 0;
-          background: radial-gradient(1000px 760px at 28% 50%, #161616 0%, #0b0b0b 72%); }
+          background: radial-gradient(1000px 760px at 28% 50%, var(--bg-glow) 0%, var(--bg) 72%); }
   #card { position: absolute; left: 160px; right: 160px; top: 0; bottom: 0;
           display: flex; flex-direction: column; justify-content: center; transform-origin: left center; }
   #kicker { font-size: 24px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-            color: #8a8a8a; margin-bottom: 28px; }
+            color: var(--accent); margin-bottom: 28px; }
   #title { font-size: 136px; font-weight: 700; line-height: 1.02; letter-spacing: -0.03em; margin: 0; }
   /* Each line is a mask: words rise into it and leave through its top.
      The padding keeps ascenders and descenders inside the mask. */
   .line { display: block; overflow: hidden; padding: 0.06em 0 0.1em; margin: -0.06em 0 -0.1em; }
   .word { display: inline-block; margin-right: 0.22em; }
-  #subtitle { font-size: 38px; font-weight: 400; color: #a3a3a3; margin-top: 36px; max-width: 1100px;
+  /* Every element render(t) moves or fades keeps its own layer from the first
+     frame. Otherwise Chrome gives an element a layer only while it moves,
+     its text is drawn a shade differently with and without one, and the job
+     stops as not repeatable. */
+  #card, #kicker, #subtitle, .word { will-change: transform, opacity; }
+  #subtitle { font-size: 38px; font-weight: 400; color: var(--muted); margin-top: 36px; max-width: 1100px;
               line-height: 1.35; letter-spacing: -0.005em; }
 </style>
 </head>
