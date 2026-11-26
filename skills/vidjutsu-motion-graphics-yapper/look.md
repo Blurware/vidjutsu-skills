@@ -35,10 +35,10 @@ All four ship in `files/kit/fonts/` under the SIL Open Font License 1.1.
 | Title | top 168, sides 70 | |
 | Cards, split | y 340 to 1020 | |
 | Caption, split | centered on y 1078 | |
-| Presenter window | x 60, y 1160, 960x630, radius 26 | x 55.6, y 604.2, 888.9x328.1, radius 24 |
+| Presenter window | x 60, y 1160, 960x630, radius 26 | x 56, y 604, 889x328, radius 24 |
 | Cards, card layout | y 290 to 1280, scaled 1.3 | |
 | Caption, card layout | centered on y 1390 | |
-| CTA pill | x 120, y 1210, 840x240 | x 111.1, y 630.2, 777.8x125 |
+| CTA pill | x 120, y 1210, 840x240 | x 111, y 630, 778x125 |
 
 The window's frame (a 4 px accent edge and eight square handles, like a
 selection in a design tool) is drawn by the film; the presenter is laid into

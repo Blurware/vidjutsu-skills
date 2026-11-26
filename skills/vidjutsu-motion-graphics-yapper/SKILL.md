@@ -61,7 +61,7 @@ Two ways, both fine; ask once if the person hasn't said which:
    face in the top half of the frame. Sound and picture are the same file.
 2. **Avatar.** A talking-head video made from a still and a voice track with
    the tools the person's own agent uses (any lip-sync or avatar model). The
-   voice is its own audio file and the avatar video is muted on the timeline.
+   voice is its own audio file and carries the sound; the avatar video is picture only.
    VidJutsu doesn't generate media: it edits and renders what you bring.
 
 Either way the presenter's face must sit in the top half of the source, so
@@ -97,14 +97,18 @@ the window crop below shows it.
 5. **Lay it out and cut the pauses.** One `edit`: `add_media` each file,
    `add_track` `v2` and `v3` (video), then:
    - **Avatar:** the voice on `a1` from 0, the avatar video on `v2` from 0
-     with `muted: true`. **On camera:** the take on `v2` from 0 (its sound
+     for the voice's length (a video clip on a video track plays no sound;
+     the voice carries it). **On camera:** the take on `v2` from 0 (its sound
      plays from the clip).
    - Every video clip needs a `layout`; start with full frame
-     `{x: 0, y: 0, width: 1000, height: 1000}`.
+     `{x: 0, y: 0, width: 1000, height: 1000, fit: "cover"}`. Layout numbers
+     are whole numbers on the 1000x1000 grid, and times are strings
+     (`"12.5"`) or whole seconds.
 
    Then `make_transcript` on the voice (or the take), poll `render_status`,
    and `timeline_words` with `pause: 0.3`. Send every pause as one
-   `cut_pauses` edit, each range shortened by 0.08 s at both ends. It cuts
+   `cut_pauses` edit (`{op: "cut_pauses", ranges: [{start: "5.6", end:
+   "5.96"}, ...]}`), each range shortened by 0.08 s at both ends. It cuts
    all tracks at once, so voice and lips stay together. Read
    `timeline_words` again: these post-cut times are the ones the scenes use.
 6. **Cut it into beats.** Split the post-cut words into 7 to 9 beats on
@@ -150,24 +154,24 @@ the window crop below shows it.
       captions and the window's frame.
     - The presenter on `v2` is drawn over it. `set_layout` on `v2` per beat
       range:
-      - **split:** the window, `{x: 55.6, y: 604.2, width: 888.9, height: 328.1,
-        shape: "rounded", radius: 24, fit: "cover", crop: {x: 0, y: 170,
-        width: 1000, height: 370}}`. Move the crop's `y` so the eyes sit a
-        third of the way down the window.
+      - **split:** the window, `{x: 56, y: 604, width: 889, height: 328,
+        shape: "rounded", radius: 24, fit: "cover", crop: {x: 0, y: 180,
+        width: 1000, height: 387}, cut: true}`. The crop is a box of the
+        source with the window's shape (387 tall for a 9:16 source); move its
+        `y` so the face fills the window with a little headroom.
       - **card:** `{x: 0, y: 0, width: 1000, height: 1000, hidden: true}`.
       - **face:** full frame `{x: 0, y: 0, width: 1000, height: 1000,
         fit: "cover"}`. From the window it glides to full frame (a third of a
         second), which reads as a push-in.
     - The CTA pill on `v3`: a second clip of the graphics, source from the
       CTA scene's start for as long as is left, placed at the moment the
-      presenter says the ask (the keyword), with layout `{x: 111.1, y: 630.2,
-      width: 777.8, height: 125, crop: {x: 111.1, y: 630.2, width: 777.8,
+      presenter says the ask (the keyword), with layout `{x: 111, y: 630,
+      width: 778, height: 125, crop: {x: 111, y: 630, width: 778,
       height: 125}, shape: "rounded", radius: 120}`. The pill pops in at the
       start of its clip.
 11. **Check.** Run the checks below and fix what fails.
-12. **Render and hand it over.** `render` with `height: 1920`... see the
-    project's `show` for the frame; poll `render_status`, then
-    `set_review_state` `ready_for_review`. Give the person
+12. **Render and hand it over.** `render` the project and poll
+    `render_status`, then `set_review_state` `ready_for_review`. Give the person
     `output.watch_url`, the reference it recreates, the script table, and
     what the graphics and render jobs cost (`usage.vcpu_seconds` at $0.03 per
     vCPU-minute).

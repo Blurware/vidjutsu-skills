@@ -316,7 +316,7 @@
       const made = C[c.type](c);
       slot.appendChild(made.el);
       const until = c.until != null ? c.until : (all[i + 1] ? all[i + 1].at : SECONDS);
-      return { c, slot, made, at: c.at || 0, until, scale: (c.scale || 1) * (layout === "card" ? zone.scale : 1) };
+      return { c, slot, made, at: c.at || 0, until, scale: (c.scale || 1) * (layout === "card" && c.type !== "header" ? zone.scale : 1) };
     });
 
     // Notes: annotation chips at frame positions.
