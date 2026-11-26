@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script>
+// Beat: BEST PART (card only). No downside.
+// Times are seconds inside this scene. Captions come from the transcript
+// (timeline_words): [start, end, text], 1 to 3 words, *word* = flair accent.
+Yap.scene({
+  "seconds": 4.96,
+  "layout": "card",
+  "cards": [
+    {
+      "type": "header",
+      "at": 0.0,
+      "text": "Loads only when *needed*",
+      "sub": "Until then Claude sees a one-line description"
+    },
+    {
+      "type": "meter",
+      "at": 2.96,
+      "label": "Claude's context",
+      "right": "room to spare",
+      "value": 0.0,
+      "from": 0.0,
+      "steps": [{"at": 0.25, "value": 0.14}],
+      "rows": [
+        {"name": "Your chat", "size": "kept"},
+        {"name": "19 skill descriptions", "size": "one line each"},
+        {"name": "pdf skill", "size": "only when used", "at": 0.9}
+      ]
+    }
+  ],
+  "captions": [
+    [0.06, 0.48, "And the best"],
+    [0.54, 1.32, "part is a"],
+    [1.4, 2.24, "skill only loads"],
+    [2.28, 2.88, "when it's *needed*"],
+    [3.06, 3.48, "so it won't"],
+    [3.52, 4.22, "clog up Claude's"],
+    [4.26, 4.84, "context"]
+  ]
+});
+</script>
+</body></html>
