@@ -65,7 +65,18 @@ Two ways, both fine; ask once if the person hasn't said which:
    VidJutsu doesn't generate media: it edits and renders what you bring.
 
 Either way the presenter's face must sit in the top half of the source, so
-the window crop below shows it.
+the window crop below shows it, with room above the head for the head pop-out
+(see [Head room](#head-room)).
+
+**The voice must match the face.** An avatar's voice is an adult voice of the
+same gender and rough age as the person in the still: never a child-like,
+cartoon or sped-up voice. Check it before you make the avatar: take the median
+pitch of the voice's voiced frames (any pitch tracker; autocorrelation over
+40 ms frames is enough). An adult man sits at about 85 to 155 Hz, an adult
+woman at about 165 to 255 Hz; a voice over 260 Hz reads as a child, so pick
+another voice. If the avatar is already made, a voice-changer model that keeps
+the timing (same length, same word times) fixes it without redoing the lip
+sync: swap the new voice in with `swap_media` on every `a1` clip.
 
 ## Steps
 
@@ -155,10 +166,11 @@ the window crop below shows it.
     - The presenter on `v2` is drawn over it. `set_layout` on `v2` per beat
       range:
       - **split:** the window, `{x: 56, y: 604, width: 889, height: 328,
-        shape: "rounded", radius: 24, fit: "cover", crop: {x: 0, y: 180,
+        shape: "rounded", radius: 24, fit: "cover", crop: {x: 0, y: 299,
         width: 1000, height: 387}, cut: true}`. The crop is a box of the
-        source with the window's shape (387 tall for a 9:16 source); move its
-        `y` so the face fills the window with a little headroom.
+        source with the window's shape (387 tall for a 9:16 source). Its `y`
+        comes from [Head room](#head-room): the window starts at the
+        forehead, and the film draws the rest of the head above it.
       - **card:** `{x: 0, y: 0, width: 1000, height: 1000, hidden: true}`.
       - **face:** full frame `{x: 0, y: 0, width: 1000, height: 1000,
         fit: "cover"}`. From the window it glides to full frame (a third of a
@@ -176,6 +188,44 @@ the window crop below shows it.
     `output.watch_url`, the reference it recreates, the script table, and
     what the graphics and render jobs cost (`usage.vcpu_seconds` at $0.03 per
     vCPU-minute).
+
+## Head room
+
+On every split beat the presenter's head breaks out over the top edge of the
+window, as if they lean out of the edit: the window is cropped at the
+forehead, and the film draws the top of the head (cut out of its background)
+in the strip just above the window, so it overlaps the window's frame. This
+is on by default; a split beat without it is unfinished.
+
+Geometry (pixels on the 1080x1920 frame): the window is x 60, y 1160, 960
+wide; the head strip is x 60, y 900, 960 x 260 (`Yap.LAYOUT.pop`). Captions
+sit at y 850 to 930 and split cards end by y 830, so nothing covers the head.
+
+1. **Place the crown.** Matte one source frame (any background-removal
+   model your agent uses) and find the top row of the head, `crown` (source
+   pixels). With a source `W` x `H` and `S = 960 / W`, set the window crop to
+   `y = round(1000 * (crown + 180 / S) / H)` on the grid: the crown then lands
+   about 180 px above the window, inside the strip. Check that the mouth stays
+   above y 1500 (the platform's buttons sit lower); if not, use a smaller 180.
+2. **Make the strips.** For each split scene, one still per film frame
+   (`round(seconds * 30)` stills): frame `n` (from 1) is timeline time
+   `scene start + (n - 1) / 30`. Map it back through the pause cuts to the
+   source time, take that source frame, cut out the presenter (alpha from the
+   matte; make fully clear pixels black so they pack small), take the source
+   rows from `crop_top - 260 / S` to `crop_top` (`crop_top = y * H / 1000`)
+   at full width, and scale them to 960 x 260. Pack the stills into
+   `<scene>/pop.mov` with the PNG codec (`ffmpeg -framerate 30 -i %04d.png
+   -c:v png -pix_fmt rgba pop.mov`), which keeps the alpha.
+   [`files/tools/make_pop.py`](files/tools/make_pop.py) does all of this on
+   your machine (Python, `rembg`, `ffmpeg`).
+3. **Wire the scene.** Add `pop: {fps: 30, frames: <count>}` to the scene
+   config, and to that scene in the film
+   `extract: [{video: "pop.mov", frames: "pop/%04d.png"}]`. The kit loads
+   `pop/0001.png`.. one per frame and draws it over the window's edge.
+
+The strip only draws above the window and the presenter video only below its
+top edge, so the two meet in one line: matte from the same source frames the
+timeline shows (post-cut times) and the line doesn't show.
 
 ## The scene config
 
@@ -209,6 +259,7 @@ Times are seconds inside the scene. Text marks: `[boxed]` (accent box),
 | `cards` | Each `{type, at, until?, x?, y?, scale?, ...}`; one card shows at a time unless you place them with `x`, `y`. |
 | `notes` | Hand-placed stickers `{text, x, y, at, until?, rot?}`. |
 | `captions` | `[start, end, text]`, 1 to 3 words. Omit on `face`. |
+| `pop` | On `split`: `{fps: 30, frames}`, the head pop-out stills (see [Head room](#head-room)). |
 | `cta` | On `face`: `{lead: "comment", keyword: "SKILLS"}`. |
 | `cursor`, `cursorUntil` | A pointer `[{at, x, y, click?, travel?}]` that moves and clicks. |
 
@@ -225,7 +276,7 @@ Card types and their keys:
 | `stat` | `value`, `from`, `prefix`, `suffix`, `label`, `countFor` |
 | `files` | `items` `[{ext, name}]`, `gap` |
 | `meter` | `label`, `right` (`{pct}` is replaced), `rows` `[{name, at}]`, `steps` `[{at, value}]` |
-| `compare` | `a {title, items}`, `b {title, items}` |
+| `compare` | `a {title, rows}`, `b {title, rows}` (rows are rich text) |
 
 The kit follows the renderer's rules for you (every property set from `t`
 alone, a layer on everything that moves, fonts loaded before the first
@@ -243,13 +294,20 @@ cut's length (within one frame).
 
 **Frames.** `frame` at 0.1 s into each beat, at its middle, and 0.05 s before
 its end, plus one still a frame after the pill comes in. It passes when:
-- On split beats the face is whole in the window, eyes in its top third, and
-  nothing of the presenter shows outside the window's frame.
+- On split beats the head breaks out over the window's top edge: hair and
+  crown whole, no background halo around them, and no step where the strip
+  meets the window. The mouth is above y 1500. Nothing else of the presenter
+  shows outside the window's frame.
+- Cards and notes end above the caption, and the caption above the crown.
 - On card beats no presenter shows at all.
 - Captions and headers are whole and inside the frame's safe zone (120 px at
   the sides, nothing important under y 1600 except the window).
 - The pill on the CTA reads as one clean shape, no ground showing at its
   corners.
+
+**Voice.** The voice's median pitch is in the adult range for the face it
+comes out of (see [The presenter](#the-presenter)). Listen once: it sounds
+like that person, not a child or a cartoon.
 
 **Sync.** Watch the render once with sound: lips match the voice from first
 word to last, and every card lands on the word that names it.

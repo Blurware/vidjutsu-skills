@@ -6,7 +6,8 @@
 // can be drawn first, last or twice and come out the same.
 //
 // Frame: 1080x1920. Three layouts, one per scene:
-//   split  cards on top, caption in the gap, presenter window at the bottom
+//   split  cards on top, caption in the gap, presenter window at the bottom,
+//          with the presenter's head popping out over the window's top edge
 //   card   cards take the whole screen (the presenter track is hidden)
 //   face   presenter full frame (the CTA); the film only draws the CTA pill,
 //          which the timeline crops out and lays over the face
@@ -32,7 +33,10 @@
   const L = {
     window: { x: 60, y: 1160, w: 960, h: 630 },
     pill: { x: 120, y: 1210, w: 840, h: 240 },
-    split: { top: 340, height: 680, caption: 1078 },
+    split: { top: 330, height: 500, caption: 890 },
+    // Head room: the strip just above the window where the presenter's head
+    // breaks out of it. Keep cards and captions out of it on split beats.
+    pop: { x: 60, y: 900, w: 960, h: 260 },
     card: { top: 290, height: 990, caption: 1390, scale: 1.3 },
     titleTop: 168,
   };
@@ -259,7 +263,7 @@
     const col = (side, d) => {
       const c = el("div", "card col " + side, root);
       el("div", "h", c, rich(d.title));
-      return (d.rows || []).map((r) => el("div", "row", c, rich(r)));
+      return (d.rows || d.items || []).map((r) => el("div", "row", c, rich(r)));
     };
     const a = col("a", p.a || {}), b = col("b", p.b || {});
     return { el: root, draw(lt) {
@@ -296,6 +300,29 @@
         h.style.top = (fy * w.h + (fy - 0.5) * 20 - 11) + "px";
       });
     }
+
+    // Head pop-out (split only): cutout stills of the presenter's head, one per
+    // frame, drawn over the window's top edge. pop: {fps, frames} reads
+    // pop/0001.png.. (RGBA, L.pop size) from this scene's folder; film.json
+    // extracts them from pop.mov. See SKILL.md, "Head room".
+    let popImg = null;
+    const P = cfg.pop && layout === "split" ? cfg.pop : null;
+    if (P) {
+      popImg = el("img", "mv", body);
+      popImg.id = "pop";
+      popImg.alt = "";
+      Object.assign(popImg.style, { left: L.pop.x + "px", top: L.pop.y + "px", width: L.pop.w + "px", height: L.pop.h + "px" });
+    }
+    const loadPop = (t) => {
+      const n = Math.max(1, Math.min(P.frames, Math.floor(t * (P.fps || 30) + 1e-6) + 1));
+      const src = `pop/${String(n).padStart(4, "0")}.png`;
+      if (popImg.getAttribute("src") === src) return null;
+      return new Promise((loaded, failed) => {
+        popImg.onload = loaded;
+        popImg.onerror = () => failed(new Error("missing still " + src));
+        popImg.setAttribute("src", src);
+      });
+    };
 
     // Title header.
     let titleWords = [];
@@ -358,7 +385,7 @@
       ring = el("div", "ring", cur);
     }
 
-    window.render = (t) => {
+    const draw = (t) => {
       // A slow push on the whole stage so a hold never freezes.
       const push = 1 + 0.018 * span(t, 0, SECONDS);
       stage.style.transform = `scale(${push})`;
@@ -376,9 +403,10 @@
         const last = until >= SECONDS - 0.001;
         const q = pop(lt, last ? null : until - at, { from: c.from == null ? 0.88 : c.from });
         const hold = 1 + 0.025 * span(lt, 0.35, until - at);
-        // Never wider than 1000 px on screen (40 px margins), unless the scene set a scale.
-        const w = made.el.offsetWidth;
-        const fit = c.scale || !w ? scale : Math.min(scale, 1000 / (w * 1.03));
+        // Never wider than 1000 px on screen (40 px margins) or taller than the
+        // stage, unless the scene set a scale.
+        const w = made.el.offsetWidth, h = made.el.offsetHeight;
+        const fit = c.scale || !w ? scale : Math.min(scale, 1000 / (w * 1.03), h ? zone.height / (h * 1.03) : scale);
         slot.style.opacity = q.o;
         slot.style.transform = `translate(-50%, -50%) translate(${c.x || 0}px, ${(c.y || 0) + q.y}px) scale(${q.s * fit * hold})`;
         made.draw(lt, until - at);
@@ -422,6 +450,8 @@
         ring.style.opacity = click; ring.style.transform = `scale(${1.6 - 0.6 * click})`;
       }
     };
+    // render(t) may be async: the frame is taken once the head still has loaded.
+    window.render = P ? async (t) => { await loadPop(t); draw(t); } : draw;
     window.render(0);
   };
 })();

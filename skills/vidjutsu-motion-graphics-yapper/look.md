@@ -33,8 +33,9 @@ All four ship in `files/kit/fonts/` under the SIL Open Font License 1.1.
 | Zone | Pixels | Timeline grid (1000x1000) |
 | --- | --- | --- |
 | Title | top 168, sides 70 | |
-| Cards, split | y 340 to 1020 | |
-| Caption, split | centered on y 1078 | |
+| Cards, split | y 330 to 830 (cards shrink to fit) | |
+| Caption, split | centered on y 890 | |
+| Head pop-out strip | x 60, y 900, 960x260; crown about 180 px above the window | |
 | Presenter window | x 60, y 1160, 960x630, radius 26 | x 56, y 604, 889x328, radius 24 |
 | Cards, card layout | y 290 to 1280, scaled 1.3 | |
 | Caption, card layout | centered on y 1390 | |
@@ -42,7 +43,10 @@ All four ship in `files/kit/fonts/` under the SIL Open Font License 1.1.
 
 The window's frame (a 4 px accent edge and eight square handles, like a
 selection in a design tool) is drawn by the film; the presenter is laid into
-it on the timeline.
+it on the timeline. On split beats the presenter's head breaks out over the
+top edge: the window is cropped at the forehead and the film draws the top of
+the head, cut out, over the frame's edge and its top handle. The speaker sits
+inside the edit and leans out of it.
 
 ## Motion
 
