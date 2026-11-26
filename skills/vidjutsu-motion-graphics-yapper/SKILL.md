@@ -37,6 +37,13 @@ only where a step below says to.
 | `files/scenes/01-hook` ... `08-cta` | Eight starter scenes, one per beat, from the sample. |
 | `files/film.json` | The sample's film: 1080x1920, the eight scenes and their seconds. |
 | `preset.json` | The gallery entry (name, use, category, tags, sample). |
+| [sample/sample.mp4](sample/sample.mp4), `sample/poster.jpg` | The approved sample short (41 s, 1080x1920) and its poster. |
+| [sample/script.md](sample/script.md) | The sample's script, beat by beat against the reference reel. |
+
+Watch the sample at its permanent link:
+https://github.com/Blurware/vidjutsu-skills/raw/main/skills/vidjutsu-motion-graphics-yapper/sample/sample.mp4
+(poster: the same path with `poster.jpg`). Point people at that link, not at a
+render's watch link, which expires after seven days.
 
 The starter files are also at
 `https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics-yapper/files/<path>`.

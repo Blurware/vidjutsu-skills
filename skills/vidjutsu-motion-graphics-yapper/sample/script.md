@@ -1,7 +1,8 @@
 # Sample script: Anthropic's Skills library
 
-Reference: [@nick_saraev, "set up a trap"](https://www.instagram.com/reel/DgFppXbvaM5/),
-225,819 plays, 2.2x the account median. Resource: [anthropics/skills](https://github.com/anthropics/skills)
+Reference: an Instagram reel of pattern 1, described second by second in
+[references.md](../references.md#pattern-1-second-by-second),
+2.2x its account's median views. Resource: [anthropics/skills](https://github.com/anthropics/skills)
 (free, Apache 2.0, about 200,900 stars on Nov 26 2026).
 Presenter: an avatar made from a still and a voice track. CTA: comment keyword
 (SKILLS). Length after cuts: 41.1 s.
