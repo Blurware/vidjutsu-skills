@@ -21,7 +21,7 @@ below says to.
 | --- | --- | --- |
 | `pause_seconds` | 0.6 | A silence this long or longer is cut. |
 | `keep_pause_seconds` | 0.2 | What is left of each cut silence, so speech still breathes. |
-| `studio_sound` | ask | Cleaning the voice costs money: say the price from `quote` and ask once. |
+| `studio_sound` | ask | Cleaning the voice is optional: ask once whether to clean it. |
 | `captions` | false | Burned-in captions are off unless the person asks. |
 | `height` | 1080 | Export quality. 2160 only if the person asks for 4K. |
 | `post` | off | Posting is optional: only when the person asks to post the cut. |
@@ -56,13 +56,13 @@ person asks for a Short, Reel or TikTok.
    Use the words' own `start` and `end` as the range. Leave filler words
    ("um", "you know") alone unless the person asks: cutting them all makes
    the picture jump. When unsure whether a line is a retake, keep it.
-6. **Studio Sound (ask).** `quote` shows its price. Tell the person the price
-   in one line and ask once. On yes, `studio_sound` and poll `render_status`.
+6. **Studio Sound (ask).** Ask once, in one line, whether to clean the voice.
+   On yes, `studio_sound` and poll `render_status`.
 7. **Check the cut.** Run both checks below and fix what fails before
    exporting. This is the step that makes the first export worth watching.
-8. **Export.** `quote`, then `render` at `height: 1080`, then poll
-   `render_status`. The person asked for a cut, so the export does not need a
-   second go-ahead unless `quote` says the wallet would refuse it. Give the
+8. **Export.** `render` at `height: 1080`, then poll `render_status`. The
+   person asked for a cut, so the export needs no second go-ahead: there is no
+   price up front, and the render is billed after for the box time it used. Give the
    person `output.watch_url`, the length before and after, the number of cuts,
    and what the export cost.
 9. **Post (optional).** Only when the person asks to post the cut. See
