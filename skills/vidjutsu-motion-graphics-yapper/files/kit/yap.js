@@ -311,6 +311,7 @@
       popImg = el("img", "mv", body);
       popImg.id = "pop";
       popImg.alt = "";
+      popImg.decoding = "sync";
       Object.assign(popImg.style, { left: L.pop.x + "px", top: L.pop.y + "px", width: L.pop.w + "px", height: L.pop.h + "px" });
     }
     const loadPop = (t) => {
@@ -321,7 +322,7 @@
         popImg.onload = loaded;
         popImg.onerror = () => failed(new Error("missing still " + src));
         popImg.setAttribute("src", src);
-      });
+      }).then(() => popImg.decode());
     };
 
     // Title header.
@@ -404,12 +405,15 @@
         const q = pop(lt, last ? null : until - at, { from: c.from == null ? 0.88 : c.from });
         const hold = 1 + 0.025 * span(lt, 0.35, until - at);
         // Never wider than 1000 px on screen (40 px margins) or taller than the
-        // stage, unless the scene set a scale.
+        // stage, unless the scene set a scale. Measured with the card in its
+        // final state, so its size never changes while it types or fills in
+        // (and never depends on the frame drawn before).
+        made.draw(until - at, until - at);
         const w = made.el.offsetWidth, h = made.el.offsetHeight;
         const fit = c.scale || !w ? scale : Math.min(scale, 1000 / (w * 1.03), h ? zone.height / (h * 1.03) : scale);
+        made.draw(lt, until - at);
         slot.style.opacity = q.o;
         slot.style.transform = `translate(-50%, -50%) translate(${c.x || 0}px, ${(c.y || 0) + q.y}px) scale(${q.s * fit * hold})`;
-        made.draw(lt, until - at);
       });
 
       notes.forEach(({ n, e }) => {
