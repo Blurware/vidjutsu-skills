@@ -160,7 +160,7 @@ body[data-look="ink"] #ground { background-image: radial-gradient(var(--grid) 2p
 .c-term .dot { width: 18px; height: 18px; border-radius: 50%; background: #3A3E47; }
 .c-term .ttl { margin-left: 14px; font-family: var(--f-ui); font-size: 30px; color: var(--code-dim); font-weight: 600; }
 .c-term .body { padding: 32px 36px 40px; font-size: 37px; line-height: 1.55; min-height: 380px; }
-.c-term .ln { white-space: pre-wrap; word-break: break-all; }
+.c-term .ln { white-space: pre-wrap; overflow-wrap: anywhere; }
 .c-term .p { color: var(--accent); filter: brightness(1.35); }
 .c-term .dim { color: var(--code-dim); }
 .c-term .ok { color: #4ADE80; }

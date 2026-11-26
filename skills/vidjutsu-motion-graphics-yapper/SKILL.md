@@ -168,7 +168,10 @@ sync: swap the new voice in with `swap_media` on every `a1` clip.
       - **split:** the window, `{x: 56, y: 604, width: 889, height: 328,
         shape: "rounded", radius: 24, fit: "cover", crop: {x: 0, y: 299,
         width: 1000, height: 387}, cut: true}`. The crop is a box of the
-        source with the window's shape (387 tall for a 9:16 source). Its `y`
+        source with exactly the window's shape: its height is
+        `round(1000 * 630 * W / (960 * H))` for a `W` x `H` source (387 for
+        the sample's 736x1248, 369 for 1080x1920), so `cover` crops nothing
+        more and the head strip meets the window without a gap. Its `y`
         comes from [Head room](#head-room): the window starts at the
         forehead, and the film draws the rest of the head above it.
       - **card:** `{x: 0, y: 0, width: 1000, height: 1000, hidden: true}`.

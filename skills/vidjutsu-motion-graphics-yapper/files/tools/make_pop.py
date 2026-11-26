@@ -32,9 +32,8 @@ ap.add_argument("--model", default="isnet-general-use")
 a = ap.parse_args()
 
 probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
-    "stream=width,height,r_frame_rate:format=duration", "-of", "json", a.video]))
+    "stream=r_frame_rate:format=duration", "-of", "json", a.video]))
 st = probe["streams"][0]
-W, H = st["width"], st["height"]
 num, den = st["r_frame_rate"].split("/")
 SRC_FPS = float(num) / float(den)
 END = float(probe["format"]["duration"])
@@ -52,15 +51,16 @@ def src_time(t):
         acc += k1 - k0
     return keeps[-1][1]
 
-S = WIN_W / W
-crop_top = a.crop_y * H / 1000
-strip_top = crop_top - POP_H / S
-if strip_top < 0: raise SystemExit("crop y too small: the strip would start above the source")
-
 tmp = tempfile.mkdtemp()
 subprocess.check_call(["ffmpeg", "-loglevel", "error", "-i", a.video, "-start_number", "0", "-q:v", "1",
                        os.path.join(tmp, "%06d.jpg")])
 count = len([f for f in os.listdir(tmp) if f.endswith(".jpg")])
+# Size of the frames as decoded (after any rotation tag), not the coded size.
+W, H = Image.open(os.path.join(tmp, "000000.jpg")).size
+S = WIN_W / W
+crop_top = a.crop_y * H / 1000
+strip_top = crop_top - POP_H / S
+if strip_top < 0: raise SystemExit("crop y too small: the strip would start above the source")
 sess = new_session(a.model)
 cache = {}
 
