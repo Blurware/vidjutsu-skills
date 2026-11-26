@@ -38,7 +38,7 @@ All four ship in `files/kit/fonts/` under the SIL Open Font License 1.1.
 | Presenter window | x 60, y 1160, 960x630, radius 26 | x 56, y 604, 889x328, radius 24 |
 | Cards, card layout | y 290 to 1280, scaled 1.3 | |
 | Caption, card layout | centered on y 1390 | |
-| CTA pill | x 120, y 1210, 840x240 | x 111, y 630, 778x125 |
+| CTA pill | x 120, y 1210, 840x240 | x 112, y 631, 776x123 (a unit inside), radius 400 |
 
 The window's frame (a 4 px accent edge and eight square handles, like a
 selection in a design tool) is drawn by the film; the presenter is laid into

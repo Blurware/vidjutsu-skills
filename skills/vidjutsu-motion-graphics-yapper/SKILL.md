@@ -165,9 +165,10 @@ the window crop below shows it.
         second), which reads as a push-in.
     - The CTA pill on `v3`: a second clip of the graphics, source from the
       CTA scene's start for as long as is left, placed at the moment the
-      presenter says the ask (the keyword), with layout `{x: 111, y: 630,
-      width: 778, height: 125, crop: {x: 111, y: 630, width: 778,
-      height: 125}, shape: "rounded", radius: 120}`. The pill pops in at the
+      presenter says the ask (the keyword), with layout `{x: 112, y: 631,
+      width: 776, height: 123, crop: {x: 112, y: 631, width: 776,
+      height: 123}, shape: "rounded", radius: 400}`. The crop sits a unit
+      inside the pill so no ground shows at its edge. The pill pops in at the
       start of its clip.
 11. **Check.** Run the checks below and fix what fails.
 12. **Render and hand it over.** `render` the project and poll

@@ -10,6 +10,7 @@ with VidJutsu's tools.
 | [`vidjutsu-edit`](skills/vidjutsu-edit/SKILL.md) | Raw footage in, finished videos out: reads the ask, brings the footage in, picks a recipe, checks and renders. Say `/vidjutsu-edit`. |
 | [`vidjutsu-clean-cut`](skills/vidjutsu-clean-cut/SKILL.md) | Raw talking-head takes in, a tight cut out: dead air, false starts and repeated lines removed, then checked and exported. |
 | [`vidjutsu-motion-graphics`](skills/vidjutsu-motion-graphics/SKILL.md) | Title cards, lower thirds and animated segments written as HTML scenes and drawn in the cloud, with starter files. |
+| [`vidjutsu-motion-graphics-yapper`](skills/vidjutsu-motion-graphics-yapper/SKILL.md) | A 9:16 Yapper short: a presenter in a window under animated cards about one tool, repo or library, recreated from a proven reel. Ships the look and eight starter scenes. |
 | [`vidjutsu-style`](skills/vidjutsu-style/SKILL.md) | Your brand as a saved look (colors, fonts, a title card and a lower third), shown as a sample and reused in every edit. |
 | [`vidjutsu-schedule`](skills/vidjutsu-schedule/SKILL.md) | Finished videos onto TikTok, Instagram and YouTube: captions per platform, a posting calendar you approve, then how each post did. |
 
