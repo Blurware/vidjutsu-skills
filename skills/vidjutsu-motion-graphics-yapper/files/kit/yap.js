@@ -316,7 +316,8 @@
       const made = C[c.type](c);
       slot.appendChild(made.el);
       const until = c.until != null ? c.until : (all[i + 1] ? all[i + 1].at : SECONDS);
-      return { c, slot, made, at: c.at || 0, until, scale: (c.scale || 1) * (layout === "card" && c.type !== "header" ? zone.scale : 1) };
+      const scale = (c.scale || 1) * (layout === "card" && c.type !== "header" ? zone.scale : 1);
+      return { c, slot, made, at: c.at || 0, until, scale };
     });
 
     // Notes: annotation chips at frame positions.
@@ -375,8 +376,11 @@
         const last = until >= SECONDS - 0.001;
         const q = pop(lt, last ? null : until - at, { from: c.from == null ? 0.88 : c.from });
         const hold = 1 + 0.025 * span(lt, 0.35, until - at);
+        // Never wider than 1000 px on screen (40 px margins), unless the scene set a scale.
+        const w = made.el.offsetWidth;
+        const fit = c.scale || !w ? scale : Math.min(scale, 1000 / (w * 1.03));
         slot.style.opacity = q.o;
-        slot.style.transform = `translate(-50%, -50%) translate(${c.x || 0}px, ${(c.y || 0) + q.y}px) scale(${q.s * scale * hold})`;
+        slot.style.transform = `translate(-50%, -50%) translate(${c.x || 0}px, ${(c.y || 0) + q.y}px) scale(${q.s * fit * hold})`;
         made.draw(lt, until - at);
       });
 
