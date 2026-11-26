@@ -266,7 +266,7 @@ Times are seconds inside the scene. Text marks: `[boxed]` (accent box),
 | `layout` | `split` (cards over the presenter window), `card` (cards full screen), `face` (presenter full frame; the page only draws the CTA pill). |
 | `look`, `accent` | `"ink"` for the dark ground; a hex accent for this page. |
 | `title` | `{text, at, until}`: the header at the top. |
-| `cards` | Each `{type, at, until?, x?, y?, scale?, ...}`; one card shows at a time unless you place them with `x`, `y`. |
+| `cards` | Each `{type, at, until?, x?, y?, scale?, popFrom?, ...}`; one card shows at a time unless you place them with `x`, `y`. `popFrom` is the scale a card pops in from (default 0.88); `from` belongs to the card type (a counter's start value). |
 | `notes` | Hand-placed stickers `{text, x, y, at, until?, rot?}`. |
 | `captions` | `[start, end, text]`, 1 to 3 words. Omit on `face`. |
 | `pop` | On `split`: `{fps: 30, frames}`, the head pop-out stills (see [Head room](#head-room)). |

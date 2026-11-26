@@ -402,7 +402,7 @@
         const vis = t >= at - 0.001 && t < until;
         if (!vis) { slot.style.opacity = 0; slot.style.transform = "translate(-50%, -50%) scale(0.9)"; made.draw(Math.max(0, Math.min(lt, until - at))); return; }
         const last = until >= SECONDS - 0.001;
-        const q = pop(lt, last ? null : until - at, { from: c.from == null ? 0.88 : c.from });
+        const q = pop(lt, last ? null : until - at, { from: c.popFrom == null ? 0.88 : c.popFrom });
         const hold = 1 + 0.025 * span(lt, 0.35, until - at);
         // Never wider than 1000 px on screen (40 px margins) or taller than the
         // stage, unless the scene set a scale. Measured with the card in its
