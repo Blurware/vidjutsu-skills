@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script>
+// Beat: HOOK (split). Title with the key words boxed, the thing already on screen.
+// Times are seconds inside this scene. Captions come from the transcript
+// (timeline_words): [start, end, text], 1 to 3 words, *word* = flair accent.
+Yap.scene({
+  "seconds": 5.34,
+  "layout": "split",
+  "title": {"text": "Claude makes [Word docs] like Anthropic", "at": 0},
+  "cards": [
+    {
+      "type": "files",
+      "at": 0.15,
+      "scale": 1.12,
+      "gap": 0.55,
+      "items": [
+        {"ext": "DOCX", "color": "#2B579A", "name": "proposal.docx"},
+        {"ext": "PPTX", "color": "#C43E1C", "name": "pitch-deck.pptx"},
+        {"ext": "XLSX", "color": "#1D6F42", "name": "model.xlsx"},
+        {"ext": "PDF", "color": "#B30B00", "name": "form.pdf"}
+      ]
+    }
+  ],
+  "notes": [{"text": "Anthropic's own playbook", "x": 560, "y": 920, "at": 4.42, "rot": -4}],
+  "captions": [
+    [0.08, 0.54, "Here's how you"],
+    [0.56, 1.08, "can make *Claude*"],
+    [1.12, 2.24, "build Word docs"],
+    [2.52, 3.14, "slide decks"],
+    [3.38, 4.08, "and spreadsheets"],
+    [4.12, 4.88, "the way Anthropic"],
+    [4.96, 5.22, "does"]
+  ]
+});
+</script>
+</body></html>

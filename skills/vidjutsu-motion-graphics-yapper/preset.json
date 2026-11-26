@@ -1,0 +1,12 @@
+{
+  "slug": "vidjutsu-motion-graphics-yapper",
+  "name": "Motion Graphics Yapper",
+  "use": "A 9:16 short where a presenter talks in a window under animated cards that show the tool, repo or library being shared.",
+  "category": "Formats",
+  "tags": ["short form", "9:16", "presenter", "motion graphics", "tools", "explainer"],
+  "skill": "skills/vidjutsu-motion-graphics-yapper/SKILL.md",
+  "sample": "sample/sample.mp4",
+  "poster": "sample/poster.jpg",
+  "length_seconds": 41,
+  "install": "npx skills add https://vidjutsu.ai"
+}
