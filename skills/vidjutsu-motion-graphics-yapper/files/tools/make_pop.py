@@ -60,7 +60,9 @@ W, H = Image.open(os.path.join(tmp, "000000.jpg")).size
 S = WIN_W / W
 crop_top = a.crop_y * H / 1000
 strip_top = crop_top - POP_H / S
-if strip_top < 0: raise SystemExit("crop y too small: the strip would start above the source")
+if strip_top < 0:
+    shutil.rmtree(tmp)
+    raise SystemExit("crop y too small: the strip would start above the source")
 sess = new_session(a.model)
 cache = {}
 
