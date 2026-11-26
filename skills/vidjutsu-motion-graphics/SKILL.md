@@ -103,12 +103,10 @@ Noto Color Emoji are installed. Any other font goes in the folder with
    film. Send the bundle you read as `expected_bundle`; on a 409, read again
    with `graphics_list` and redo the change on top. Brand fonts, logos or
    footage go in as `files` by hash: PUT each missing one to its link.
-4. **Render.** For a film over a minute long, `quote` the project with
-   graphics_seconds (the film's length) first and tell the person the price;
-   shorter films need no go-ahead. `make_graphics` with the workspace, the film (from film.json,
+4. **Render.** No price up front and no go-ahead: the job is billed after for
+   the box time it used. `make_graphics` with the workspace, the film (from film.json,
    with the size from step 1 and the defaults above), a `name` such as
-   "<project>-graphics", an `idempotency_key` and the project. A 1080p film
-   costs about $0.48 a minute per subframe plus a few cents to start. Poll `graphics_status`
+   "<project>-graphics", an `idempotency_key` and the project. Poll `graphics_status`
    until it ends. On "not repeatable" or a page error, fix the scene it names
    and render again: the error gives the time `t`.
 5. **Place it.** `output.media` is a video. Add it with an `add_media` edit
@@ -126,7 +124,7 @@ Noto Color Emoji are installed. Any other font goes in the folder with
 7. **Hand it over.** Give the person `output.watch_url` from
    `graphics_status` (the graphics on their own) and say what the job cost
    (`usage.vcpu_seconds` at $0.03 per vCPU-minute). If they asked for the
-   finished video, `quote`, then `render` the project and poll
+   finished video, `render` the project and poll
    `render_status`, and give them that `output.watch_url` too.
 
 ## Checks

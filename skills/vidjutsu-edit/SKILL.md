@@ -114,8 +114,8 @@ Give each edit a one-line `summary`; it is what history shows.
 
 1. Run the recipe's checks (`check`, and `frame` around the cuts). Fix what
    fails before anyone watches.
-2. `quote` shows the price. The person asked for the edit, so render without a
-   second go-ahead unless `quote` says the wallet would refuse it.
+2. The person asked for the edit, so render without a second go-ahead: there
+   is no price up front, and the render is billed after for the box time it used.
 3. `render {project, idempotency_key, height: 1080}` (plus `style` /
    `captions`), then poll `render_status` until `succeeded`.
 4. Give the person each `output.watch_url`, what you cut (length before and
