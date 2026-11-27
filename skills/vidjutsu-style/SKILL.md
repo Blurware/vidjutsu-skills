@@ -3,7 +3,7 @@ name: vidjutsu-style
 description: Turn a brand into a saved VidJutsu look (colors, fonts, a title card and a lower third), render a short sample, and save it to the account so every later edit reuses it. Use when the person asks for a style, a look, brand colors or fonts on their videos, or to save or change one. Needs the VidJutsu MCP server or CLI.
 license: Apache-2.0
 metadata:
-  version: "1.0.0"
+  version: "2.0.0"
   creator: VidJutsu
 ---
 
@@ -11,34 +11,37 @@ metadata:
 
 A style is the look a person's videos share: colors, fonts, and how the title
 card and lower third are drawn. This skill makes one, shows a sample, and
-saves it to the person's VidJutsu account. vidjutsu-motion-graphics and
-vidjutsu-clean-cut then start from it instead of the plain defaults.
+saves it to the person's VidJutsu account with `save_style`. It then shows
+up in `styles` next to VidJutsu's own, and every later edit reads it by name
+with `get_style` and copies it with `use_style`.
 
 Use the defaults and don't ask first. The sample is the proposal: the person
 reacts to moving pictures, not to a list of questions.
 
-## Where a saved style lives
+## What a saved style holds
 
-A saved style is a graphics workspace named `style-<name>` (lowercase, words
-joined with `-`, for example `style-max-show`). It holds:
+`save_style` keeps a style in the account, under an id made from its name
+(`Max Show` is `max-show`). It holds:
 
-| File | What it is |
+| Part | What it is |
 | --- | --- |
-| `style.json` | The look as data: `{name, colors: {bg, bg_glow, text, muted, accent, panel, panel_edge}, font: {family, file?}, radius, grain, notes}`. |
-| `title/index.html` | The title card, in the look. |
-| `lower-third/index.html` | The lower third, in the look. |
-| `film.json` | The sample film: the title card then the lower third. |
-| font and logo files | In each scene folder that uses them, added by hash. |
+| kit | The files of a graphics workspace (`style-<name>`), by hash: `title/index.html`, `lower-third/index.html`, font and logo files in each scene folder that uses them. |
+| `look` | `{palette: {bg, bg_glow, text, muted, accent, panel, panel_edge}, fonts: {display}, notes}`: colors as `#RRGGBB` (put opacity in the pages, not here). |
+| `guide` | The method in plain steps, for the next agent: which scene is for what, what to change (the CONTENT block, SECONDS) and what to keep. |
+| `film` | The sample film: the title card then the lower third. |
+| `sample` | `{hash}` of the sample video. |
+| `layouts` | Optional screen and camera layouts, if the look has one. |
 
-Workspaces keep every version, so a changed style can go back to an earlier
-one with `graphics_write` `restore`. There is no list of workspaces: tell the
-person the style's name, and when the agent has a memory, save the name there.
+Saving again under the same name makes a new version. The workspace keeps
+every version of the files too, so `graphics_write` `restore` goes back.
+Names of VidJutsu's own styles are taken. An API key needs the `styles`
+scope; an agent's editing connection has it.
 
 ## Defaults
 
 | Setting | Default | Meaning |
 | --- | --- | --- |
-| `name` | the person's brand or show name | The style is saved as `style-<name>`. |
+| `name` | the person's brand or show name | The style's name; its workspace is `style-<name>`. |
 | `font` | Inter | Inter, Inter Display, JetBrains Mono and Satoshi are installed. |
 | `grain` | 0.1 | The film's grain effect. |
 | `radius` | 12px | Corner of the lower third's box. |
@@ -59,14 +62,15 @@ person the style's name, and when the agent has a memory, save the name there.
 2. **Start from the starter files.** They ship with vidjutsu-motion-graphics in
    `files/`: film.json, title/index.html and lower-third/index.html (also at
    https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics/files/film.json
-   and the same path for the two pages). `graphics_list` the workspace
-   `style-<name>` first: if it already has files, this is a change to a saved
-   style, so patch those instead of starting over.
+   and the same path for the two pages). Check `styles` first: if the person
+   already saved this style, this is a change, so `use_style {style,
+   workspace: "style-<name>"}` (or `graphics_list` that workspace) and patch
+   those files instead of starting over.
 3. **Write the look.** Each page opens with a LOOK block of CSS variables
    (`--font`, `--bg`, `--bg-glow`, `--text`, `--muted`, `--accent`,
-   `--panel`, `--panel-edge`, `--radius`). Set the same values in both pages,
-   write `style.json` with them, and put the brand's name in each CONTENT
-   block so the sample looks like theirs. A brand font goes in each scene
+   `--panel`, `--panel-edge`, `--radius`). Set the same values in both
+   pages, and put the brand's name in each CONTENT block so the sample looks
+   like theirs. A brand font goes in each scene
    folder as a `files` entry by hash, loaded with `@font-face` by relative
    path; `--font` names it first, with Inter after it. Send everything in one
    `graphics_write` (or `patch` entries on a saved style, with
@@ -80,24 +84,25 @@ person the style's name, and when the agent has a memory, save the name there.
    (from `output.watch_url`, or placed on a scratch project and read with
    `frame`) at the middle of each card show every word whole and readable,
    with the text clearly lighter or darker than what is behind it.
-6. **Hand it over.** Give the person `output.watch_url`, the style's name
-   (`style-<name>`) and what the job cost (`usage.vcpu_seconds` at $0.03 per
-   vCPU-minute). Say it is saved and that later edits use it when they name
-   it.
+6. **Save it.** `save_style {name, workspace: "style-<name>", guide, look,
+   film, sample: {hash: <the sample's output.hash>}, format, tagline}`. Write
+   the guide for an agent that has never seen the style: one line per step.
+7. **Hand it over.** Give the person `output.watch_url`, the style's name and
+   id, and what the job cost (`usage.vcpu_seconds` at $0.03 per vCPU-minute).
+   Say it is saved to their account and that later edits use it when they
+   name it.
 
 ## Using a saved style
 
-- **vidjutsu-motion-graphics**: when the person names a style, start from
-  `style-<name>` instead of the starter files: `graphics_read` its title and
-  lower-third pages and write them into the project's graphics workspace (font
-  and logo files go across as `files` by the hashes `graphics_list` gives),
-  then change only the words.
-- **vidjutsu-clean-cut** and **vidjutsu-edit**: a cut "in my style" gets a
-  title card from the saved style through vidjutsu-motion-graphics.
+Any agent on the account finds it in `styles`. `get_style {style}` returns
+the look and the guide; `use_style {style, workspace}` copies the kit into a
+new workspace and answers the film. vidjutsu-motion-graphics then changes
+only the words and renders it; vidjutsu-clean-cut and vidjutsu-edit place it.
 
 ## Changing a style
 
 "Make the accent orange" or "use our new font" is a `patch` to the LOOK block
-in both pages and to `style.json`, then a new sample. Videos already rendered
+in both pages of `style-<name>`, a new sample, and `save_style` again under the
+same name with the new `look` (a new version). Videos already rendered
 keep the look they were made with; a project re-renders in the new look only
 when its graphics are made again.

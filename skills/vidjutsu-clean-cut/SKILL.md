@@ -96,16 +96,15 @@ before anything is scheduled.
 ## Styles
 
 The first export is plain: a clean cut needs no graphics. If the person asks
-for a title or a look, `styles` lists the looks and `get_style` says how one
-is used. Pass it to `render` as `style`, for example
-`{id: "terminal", title: {text: "..."}}`. A title card covers the first
-seconds of the picture while the sound runs on, so either let the voice start
-under it or open a gap first with an `insert_gap` edit. Put a stamp on a word
-by using that word's own `start` from `timeline_words` as its `at`.
-
-When the person has a saved look of their own (made with vidjutsu-style, kept
-in the graphics workspace `style-<name>`) and asks for it, make the title card
-from it with vidjutsu-motion-graphics instead of a built-in style.
+for a title or a look, `styles` lists the styles in their account (VidJutsu's
+own and the ones they saved) and `get_style` returns one with its guide.
+Follow the guide: `use_style` copies the style's kit into a graphics
+workspace, vidjutsu-motion-graphics changes the words and renders it with
+`make_graphics`, and you place the film on the timeline. A title card covers
+the first seconds of the picture while the sound runs on, so either let the
+voice start under it or open a gap first with an `insert_gap` edit.
+`apply_layout {style}` lays out a screen and camera recording with the
+style's own layouts.
 
 ## After the first export
 
