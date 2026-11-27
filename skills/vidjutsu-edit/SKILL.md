@@ -112,13 +112,18 @@ name; don't guess what it looks like.
 3. **Use the kit.** `use_style {style, workspace}` copies the kit into a new
    graphics workspace (one per video, for example `<project>-graphics`) and
    answers the starter film. Change the words in the scenes with
-   `graphics_write` `patch`, `make_graphics {workspace, film}`, poll
+   `graphics_write` `patch`. Set the film's `width` and `height` to the
+   project's frame (`show` gives `canvas`: 1920x1080 for 16:9, 1080x1920 for
+   9:16) when the style's film is drawn for the other one; a full-frame card
+   in the wrong frame is letterboxed. Then `make_graphics {workspace, film}`, poll
    `graphics_status`, then place `output.media` with `add_media` and
    `insert_clip`. A style with `ready: false` has no kit yet: follow its guide
    with vidjutsu-motion-graphics.
-4. **Lay out screen and camera** with the style's layouts:
-   `apply_layout {project, style}` (its first layout) or
-   `{project, style, preset: "<layout name>"}`.
+4. **Lay out screen and camera**, only when the style has `layouts` and the
+   project has both a screen and a camera track: `apply_layout {project,
+   style}` (its first layout) or `{project, style, preset: "<layout name>"}`.
+   A style without layouts (most saved brand looks) leaves the picture as it
+   is.
 5. **Your part.** VidJutsu stores and draws; it makes nothing with a model.
    Words, scripts, a cut-out of the speaker or a voice are yours to make with
    your own tools, then `ingest` them.
