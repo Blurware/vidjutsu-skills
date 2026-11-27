@@ -1,0 +1,60 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: THE TURN (split). "Here's the clever part": the project's own site (dark), markers on each word of the claim, lenses on the details.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "split",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "img": "img/site.png",
+      "iw": 1080,
+      "ih": 2640,
+      "dark": true,
+      "w": 1000,
+      "h": 664,
+      "y": -77,
+      "scale": 1,
+      "popFrom": 1,
+      "url": "kajisho5.github.io/ffmpeg-skill",
+      "life": 3.184,
+      "cam": [
+        {"at": 0, "cx": 540, "cy": 1640, "z": 0.95},
+        {"at": 0.819, "cx": 540, "cy": 1962, "z": 1.05, "dur": 0.379},
+        {"at": 2.214, "cx": 540, "cy": 2262, "z": 1, "dur": 0.341}
+      ],
+      "marks": [
+        {"at": 1.228, "rect": [100, 1823, 548, 40], "dur": 0.227},
+        {"at": 1.85, "rect": [100, 2087, 372, 40], "dur": 0.19}
+      ],
+      "lenses": [
+        {"at": 1.941, "until": 2.502, "rect": [905, 2078, 116, 56], "scale": 1.7, "dx": -30, "radius": 34, "pad": 6},
+        {"at": 2.547, "rect": [56, 2266, 770, 60], "scale": 1.14, "dx": 60, "pad": 8},
+        {"at": 2.865, "rect": [66, 2340, 232, 74], "scale": 1.32, "dx": 30, "dy": 26, "radius": 40, "pad": 4}
+      ]
+    }
+  ],
+  "captions": [
+    [0.09, 0.39, "Here's the"],
+    [0.43, 0.93, "*clever* part"],
+    [1.09, 1.83, "after every edit"],
+    [1.97, 2.41, "it *measures*"],
+    [2.45, 2.77, "the file"],
+    [2.81, 3.19, "it just made"]
+  ],
+  "seconds": 3.1333
+});
+Yap.shots();
+</script>
+</body></html>

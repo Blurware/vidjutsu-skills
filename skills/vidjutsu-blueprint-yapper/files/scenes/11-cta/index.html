@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: CTA (face). The presenter goes full frame; this page only draws the pill, which the timeline crops out and lays over the face.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "face",
+  "cta": {"lead": "more free AI tools", "keyword": "FOLLOW"},
+  "seconds": 2.4333
+});
+Yap.shots();
+</script>
+</body></html>

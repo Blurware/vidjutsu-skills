@@ -1,12 +1,19 @@
 {
   "slug": "vidjutsu-blueprint-yapper",
   "name": "Blueprint Yapper",
-  "use": "A 9:16 short where a presenter talks in a window under animated cards that show the tool, repo or library being shared.",
+  "use": "A 9:16 short where a presenter talks in a window under the real page of the tool, repo or library being shared, with highlights, clicks and its own demo clips.",
   "category": "Formats",
-  "tags": ["short form", "9:16", "presenter", "motion graphics", "tools", "explainer"],
+  "tags": [
+    "short form",
+    "9:16",
+    "presenter",
+    "motion graphics",
+    "tools",
+    "explainer"
+  ],
   "skill": "skills/vidjutsu-blueprint-yapper/SKILL.md",
   "sample": "sample/sample.mp4",
   "poster": "sample/poster.jpg",
-  "length_seconds": 41,
+  "length_seconds": 33,
   "install": "npx skills add https://vidjutsu.ai"
 }

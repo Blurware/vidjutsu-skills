@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: INSTALL (split). The requirement highlighted on the README, then the site's install box: the cursor clicks Copy.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "split",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "until": 0.967,
+      "img": "img/verify.png",
+      "iw": 1080,
+      "ih": 1600,
+      "w": 1000,
+      "h": 664,
+      "y": -77,
+      "scale": 1,
+      "popFrom": 1,
+      "url": "github.com/kajisho5/ffmpeg-skill",
+      "life": 0.967,
+      "cam": [
+        {"at": 0, "cx": 540, "cy": 490, "z": 0.926},
+        {"at": 0.064, "cx": 452, "cy": 484, "z": 1.22, "dur": 0.322}
+      ],
+      "marks": [
+        {"at": 0.403, "rect": [66, 463, 744, 36], "dur": 0.322}
+      ]
+    },
+    {
+      "type": "page",
+      "at": 0.87,
+      "until": 9,
+      "img": "img/site.png",
+      "iw": 1080,
+      "ih": 2640,
+      "dark": true,
+      "w": 1000,
+      "h": 664,
+      "y": -77,
+      "scale": 1,
+      "popFrom": 1,
+      "url": "kajisho5.github.io/ffmpeg-skill",
+      "life": 0.967,
+      "tilt": {"rot": -3, "dur": 0.322},
+      "cam": [
+        {"at": 0, "cx": 472, "cy": 800, "z": 1},
+        {"at": 0.081, "cx": 472, "cy": 824, "z": 1.08, "dur": 0.403}
+      ],
+      "cursor": [
+        {"at": 0.04, "x": 520, "y": 1010},
+        {"at": 0.419, "x": 830, "y": 828, "click": true, "travel": 0.339}
+      ],
+      "lenses": [
+        {"at": 0.419, "rect": [754, 786, 148, 76], "scale": 1.35, "radius": 18, "pad": 2}
+      ]
+    }
+  ],
+  "captions": [
+    [0.08, 0.56, "You just need"],
+    [0.66, 1.18, "*FFmpeg*"],
+    [1.24, 1.72, "installed"]
+  ],
+  "seconds": 1.8
+});
+Yap.shots();
+</script>
+</body></html>

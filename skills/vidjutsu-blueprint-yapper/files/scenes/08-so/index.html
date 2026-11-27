@@ -1,0 +1,52 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: SO (split). The README's "why" paragraph: the key phrase highlighted, the old way struck through.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "split",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "img": "img/why.png",
+      "iw": 1080,
+      "ih": 2000,
+      "w": 1000,
+      "h": 664,
+      "y": -77,
+      "scale": 1,
+      "popFrom": 1,
+      "url": "github.com/kajisho5/ffmpeg-skill#why",
+      "life": 2.5,
+      "cam": [
+        {"at": 0, "cx": 540, "cy": 330, "z": 0.926},
+        {"at": 0.556, "cx": 570, "cy": 356, "z": 1.24, "dur": 0.37},
+        {"at": 1.5, "cx": 520, "cy": 262, "z": 1.34, "dur": 0.324}
+      ],
+      "marks": [
+        {"at": 0.833, "rect": [345, 364, 461, 36]},
+        {"at": 1.944, "rect": [526, 220, 178, 36], "kind": "strike", "dur": 0.278}
+      ]
+    }
+  ],
+  "captions": [
+    [0.08, 0.66, "So your agent"],
+    [0.72, 1.44, "*checks* its work"],
+    [1.6, 2, "instead of"],
+    [2.04, 2.42, "*guessing*"]
+  ],
+  "seconds": 2.5
+});
+Yap.shots();
+</script>
+</body></html>

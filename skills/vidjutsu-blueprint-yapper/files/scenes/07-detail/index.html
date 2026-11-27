@@ -1,0 +1,55 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: DETAIL (card). The thing it does, on its real output (no address bar): the camera snaps to it and one lens per item said.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "card",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "img": "img/og2x.png",
+      "iw": 2560,
+      "ih": 1280,
+      "dark": true,
+      "w": 1000,
+      "h": 1130,
+      "y": -40,
+      "scale": 0.7692307692307692,
+      "popFrom": 1,
+      "life": 2.422,
+      "tilt": {"rot": 3, "dur": 0.295},
+      "cam": [
+        {"at": 0, "cx": 1280, "cy": 640, "z": 0.62},
+        {"at": 0.013, "cx": 2002, "cy": 560, "z": 1.06, "dur": 0.327, "ease": "outQuint"}
+      ],
+      "lenses": [
+        {"at": 0.19, "until": 0.641, "rect": [1606, 330, 798, 88], "scale": 1.16, "pad": 0},
+        {"at": 0.641, "until": 1.322, "rect": [1606, 418, 798, 88], "scale": 1.16, "pad": 0},
+        {"at": 1.335, "until": 1.911, "rect": [1606, 506, 798, 88], "scale": 1.16, "pad": 0},
+        {"at": 1.924, "until": 2.239, "rect": [1606, 594, 798, 88], "scale": 1.16, "pad": 0},
+        {"at": 2.199, "rect": [1626, 712, 238, 82], "scale": 1.5, "dx": 60, "dy": 20, "radius": 45, "pad": 2}
+      ]
+    }
+  ],
+  "captions": [
+    [0.08, 0.48, "the *length*"],
+    [0.52, 1.18, "the frame *size*"],
+    [1.24, 1.74, "the frame *rate*"],
+    [1.78, 2.32, "the *loudness*"]
+  ],
+  "seconds": 2.4
+});
+Yap.shots();
+</script>
+</body></html>

@@ -1,29 +1,33 @@
-# Sample script: Anthropic's Skills library
+# Sample script: a free video-editing skill for Claude Code
 
-Reference: an Instagram reel of pattern 1, described second by second in
-[references.md](../references.md#pattern-1-second-by-second),
-2.2x its account's median views. Resource: [anthropics/skills](https://github.com/anthropics/skills)
-(free, Apache 2.0, about 200,900 stars on Nov 26 2026).
-Presenter: an avatar made from a still and a voice track. CTA: comment keyword
-(SKILLS). Length after cuts: 41.1 s.
+Reference: a resource-reveal reel from an outlier bank (3x or more its
+account's median views), recreated near verbatim. Resource:
+[kajisho5/ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill), a free
+skill that lets a coding agent edit video with FFmpeg (past 11,000 stars on
+Nov 26 2026). Presenter: an avatar made from a still and a voice track. CTA:
+follow. Length after cuts: 32.6 s, 11 beats.
 
-| Beat | Layout | Reference line | Our line |
-| --- | --- | --- | --- |
-| Hook | split | Here's how you can protect your app from getting cloned or reverse engineered by AI by setting up a trap. | Here's how you can make Claude build Word docs, slide decks, and spreadsheets the way Anthropic does. |
-| Name it | card | It's called BLA, a free tool that protects your app, website, or even video game. | It's called Skills, a free library from Anthropic for documents, design, or even testing your web app, |
-| Setup | split | And using it is really simple: you just install it and point it at your app right before you release it. | and using it is really simple. You just add the marketplace in Claude Code and pick a set. |
-| Mechanism | card | Then, it'll plant fake keys and decoy code inside your app. | Then Claude loads the right skill on its own, |
-| Payoff | split | So when somebody uses AI to try and reverse engineer it, their AI gets confused and'll burn through all of their tokens without getting anything useful. | so when you ask it to fill out a PDF form or build a pitch deck, it follows the same playbook behind Claude's own file features. |
-| Best part | card | And the best part is, your users still get the exact same app without having to lose any performance at all. | And the best part is a skill only loads when it's needed, so it won't clog up Claude's context. |
-| Free | split | Plus, it's completely free and works right inside of Claude Code and Codex. | Plus, it's completely free, has over two hundred thousand stars on GitHub, and works right inside Claude Code. |
-| CTA | face | So if you want to try this for yourself, just comment "Trap" down below, and I'll DM you the link. | So if you want to try this for yourself, just comment "skills" down below and I'll DM you the link. |
+The starter scenes in `files/scenes/` are this short's own scenes, with its
+captures in each scene's `img/`.
 
-**Took:** the eight beats in order, the hook's "Here's how you can X", "It's
-called X, a free Y for A, B, or even C", "using it is really simple: you just",
-"Then...", "So when...", "And the best part is", "Plus, it's completely free
-and works right inside of Claude Code", and the CTA word for word.
+| Beat | Scene | Layout | Our line | On screen |
+| --- | --- | --- | --- | --- |
+| Hook | 01-hook | split | This free skill lets Claude Code edit your videos, and it actually checks its own work. | The repo page: a lens lifts the name, the camera cuts down to the line that matches the promise, markers land on the claim words. |
+| Proof | 02-stars | card | It's already past eleven thousand stars on GitHub. | The cursor clicks the real star button, a lens pops it out, a counter counts up to the true number. |
+| Count | 03-count | card | You get forty-two video tools. | The tool table scrolls past, dimmed, behind one big number. |
+| Tour | 04-tour | split | It cuts clips, adds captions, reframes for vertical, strips out the silences and fixes the loudness. | One of the repo's own demo clips per thing named, each with its real command typing. |
+| Works with | 05-works-with | card | It works with Claude Code, Cursor and Codex. | The page's line that lists them; a lens lifts each name as it's said. |
+| The turn | 06-clever | split | Here's the clever part: after every edit it measures the file it just made, | The project's own site (dark), markers on each word of the claim. |
+| Detail | 07-detail | card | the length, the frame size, the frame rate, the loudness. | Its real output: the camera snaps to it, one lens per item said. |
+| So | 08-so | split | So your agent checks its work instead of guessing. | The README's "why" paragraph, the key phrase highlighted, the old way struck through. |
+| Local / free | 09-local | card | And it all runs on your computer. No uploads, no API keys. | The page's no-keys lines, a marker on each as it's said. |
+| Install | 10-install | split | You just need FFmpeg installed. | The requirement highlighted on the README, then the site's install box; the cursor clicks Copy. |
+| CTA | 11-cta | face | Follow for more free AI tools. | Presenter full frame, the ask in a pill. |
 
-**Changed:** the resource (a document skills library instead of an app
-protector), the payoff (two real asks instead of burned tokens), the best
-part (skills load only when needed), the proof (the repo's real star count),
-and the keyword.
+**Took:** the reference's beat order and pacing (a new picture every 1.5 to
+5 s), the hook's "This free X lets Y, and it actually Z", the proof number
+right after the hook, the tour of what it does, "Here's the clever part", and
+a one-line ask.
+
+**Changed:** the resource and its facts (stars, tool count, what it works
+with), and the call to action (follow).

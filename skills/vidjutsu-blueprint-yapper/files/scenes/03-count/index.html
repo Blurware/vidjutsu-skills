@@ -1,0 +1,53 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: COUNT (card). The tool table scrolls past, dimmed, behind one big number.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "card",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "until": 9,
+      "img": "img/tools.jpg",
+      "iw": 1080,
+      "ih": 6600,
+      "w": 1000,
+      "h": 1130,
+      "y": -40,
+      "scale": 0.7692307692307692,
+      "popFrom": 1,
+      "url": "github.com/kajisho5/ffmpeg-skill#tools",
+      "push": 0,
+      "tilt": {"rot": -3, "dur": 0.386},
+      "cam": [
+        {"at": 0, "cx": 540, "cy": 560, "z": 0.926},
+        {"at": 0.386, "cx": 540, "cy": 6000, "z": 0.926, "dur": 1.35}
+      ],
+      "marks": [
+        {"at": 0.077, "rect": [66, 176, 246, 36], "dur": 0.193}
+      ],
+      "dim": {"at": 0.386, "to": 0.5}
+    },
+    {"type": "odo", "at": 0.289, "until": 9, "x": 0, "y": -40, "scale": 0.7692307692307692, "popFrom": 0.6, "from": 1, "value": 42, "start": 0.096, "countFor": 0.964, "star": false, "size": 460, "count": 0, "burst": false}
+  ],
+  "captions": [
+    [0.07, 0.35, "You get"],
+    [0.43, 0.87, "*forty-two*"],
+    [0.95, 1.61, "video tools"]
+  ],
+  "seconds": 1.8
+});
+Yap.shots();
+</script>
+</body></html>

@@ -6,59 +6,47 @@
   "scenes": [
     {
       "dir": "01-hook",
-      "seconds": 5.34,
-      "extract": [
-        {
-          "video": "pop.mov",
-          "frames": "pop/%04d.png"
-        }
-      ]
+      "seconds": 4.3667
     },
     {
-      "dir": "02-name",
-      "seconds": 5.84
+      "dir": "02-stars",
+      "seconds": 2.7667
     },
     {
-      "dir": "03-setup",
-      "seconds": 4.7,
-      "extract": [
-        {
-          "video": "pop.mov",
-          "frames": "pop/%04d.png"
-        }
-      ]
+      "dir": "03-count",
+      "seconds": 1.8
     },
     {
-      "dir": "04-mechanism",
+      "dir": "04-tour",
+      "seconds": 5.1
+    },
+    {
+      "dir": "05-works-with",
+      "seconds": 2.6333
+    },
+    {
+      "dir": "06-clever",
+      "seconds": 3.1333
+    },
+    {
+      "dir": "07-detail",
+      "seconds": 2.4
+    },
+    {
+      "dir": "08-so",
       "seconds": 2.5
     },
     {
-      "dir": "05-payoff",
-      "seconds": 6.44,
-      "extract": [
-        {
-          "video": "pop.mov",
-          "frames": "pop/%04d.png"
-        }
-      ]
+      "dir": "09-local",
+      "seconds": 3.7
     },
     {
-      "dir": "06-best-part",
-      "seconds": 4.96
+      "dir": "10-install",
+      "seconds": 1.8
     },
     {
-      "dir": "07-free",
-      "seconds": 6.1,
-      "extract": [
-        {
-          "video": "pop.mov",
-          "frames": "pop/%04d.png"
-        }
-      ]
-    },
-    {
-      "dir": "08-cta",
-      "seconds": 5.21
+      "dir": "11-cta",
+      "seconds": 2.4333
     }
   ]
 }

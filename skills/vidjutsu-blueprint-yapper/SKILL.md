@@ -3,7 +3,7 @@ name: vidjutsu-blueprint-yapper
 description: Make a Blueprint Yapper short with VidJutsu (say /vidjutsu-edit <take> blueprint-yapper), a 9:16 reel where a presenter talks in a window under animated graphics that show the tool, repo or library being shared, with the real page, real clicks and the tool's own demo footage, sound effects and a music bed. Use when the person asks for a Blueprint Yapper (blueprint-yapper), or for a Yapper without naming another Yapper style, a "this tool does X" short, or a short about a resource, and has a raw talking-head take (or will record one). Recreates one proven reel near verbatim and ships the look, the kit, starter scenes and the tools. Needs the VidJutsu MCP server or CLI.
 license: Apache-2.0
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
   creator: VidJutsu
 ---
 
@@ -38,11 +38,11 @@ only where a step below says to.
 | `files/kit/yap.css`, `files/kit/yap.js` | The kit: layout, captions, ten drawn card types, motion. Every scene loads it. |
 | `files/kit/shots.css`, `files/kit/shots.js` | Shots: the cards that show real things (`page`, `crop`, `demo`, `odo`). |
 | `files/kit/fonts/` | Bricolage Grotesque, Inter, Instrument Serif italic, JetBrains Mono (all SIL OFL 1.1). |
-| `files/scenes/01-hook` ... `08-cta` | Eight starter scenes, one per beat, from the sample. |
-| `files/film.json` | The sample's film: 1080x1920, the eight scenes and their seconds. |
+| `files/scenes/01-hook` ... `11-cta` | Eleven starter scenes, one per beat: the sample's own scenes, each with its real captures in `img/`. |
+| `files/film.json` | The sample's film: 1080x1920, the eleven scenes and their seconds (32.63 s). |
 | `files/tools/` | Tools that run on your machine (Node 22+, Python 3, ffmpeg, Chrome); see [The tools](#the-tools). |
 | `preset.json` | The gallery entry (name, use, category, tags, sample). |
-| [sample/sample.mp4](sample/sample.mp4), `sample/poster.jpg` | The approved sample short (41 s, 1080x1920) and its poster. |
+| [sample/sample.mp4](sample/sample.mp4), `sample/poster.jpg` | The approved sample short (33 s, 1080x1920) and its poster. |
 | [sample/script.md](sample/script.md) | The sample's script, beat by beat against the reference reel. |
 
 Watch the sample at its permanent link:
@@ -157,8 +157,14 @@ sent it. What the take needs:
    each demo clip the repo ships (GIFs and videos in its README or docs) into
    a sprite sheet with `tools/make_sheet.py`. Use only what the resource
    itself publishes, and check that every number on it is today's.
-8. **Build the scenes.** For each beat, copy the starter scene closest to it,
-   load `kit/shots.css` and `kit/shots.js` after the kit, and write its
+8. **Build the scenes.** For each beat, copy the starter scene closest to it
+   (or start from `use_style`, which puts all eleven in the workspace). The
+   starters are the sample's own scenes, each with its captures in `img/`:
+   swap in your captures and re-aim `cam`, `marks`, `lenses` and `cursor` at
+   their pixels, keep the moves, and rewrite `captions` and `seconds` from
+   your words. Delete the scenes your script has no beat for. Drawn cards are
+   only for a beat with nothing real to show. Load `kit/shots.css` and
+   `kit/shots.js` after the kit, and write its
    `Yap.scene({...})` config (see [The scene config](#the-scene-config) and
    [Shots](#shots)). Put every image it uses in the scene's own `img/`
    folder. Captions come from the post-cut words minus the scene's start:
@@ -357,7 +363,7 @@ sit at y 850 to 930 and split cards end by y 830, so nothing covers the head.
    [`files/tools/make_pop.py`](files/tools/make_pop.py) does all of this on
    your machine (Python, `rembg`, `ffmpeg`):
    `python3 tools/make_pop.py --video take.mp4 --cuts cuts.json --crop-y 302
-   --scene 01-hook:0:4.8667 --scene 04-tour:9.7667:5.6667 --scenes scenes`.
+   --scene 01-hook:0:4.3667 --scene 04-tour:8.9333:5.1 --scenes scenes`.
 3. **Wire the scene.** Add `pop: {fps: 30, frames: <count>}` to the scene
    config; `beats.py` already put `extract: [{video: "pop.mov", frames:
    "pop/%04d.png"}]` on every split scene of the film. The kit loads

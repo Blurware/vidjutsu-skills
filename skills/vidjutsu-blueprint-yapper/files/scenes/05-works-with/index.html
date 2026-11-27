@@ -1,0 +1,55 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: WORKS WITH (card). The page's line that lists them; a lens lifts each name as it's said.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "card",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "img": "img/page.png",
+      "iw": 1080,
+      "ih": 4800,
+      "w": 1000,
+      "h": 1130,
+      "y": -40,
+      "scale": 0.7692307692307692,
+      "popFrom": 1,
+      "url": "github.com/kajisho5/ffmpeg-skill",
+      "life": 2.604,
+      "tilt": {"rot": -3, "dur": 0.391},
+      "cam": [
+        {"at": 0, "cx": 540, "cy": 2120, "z": 0.926},
+        {"at": 0.434, "cx": 500, "cy": 2060, "z": 1.15, "dur": 0.347},
+        {"at": 1.285, "cx": 500, "cy": 2270, "z": 1.15, "dur": 0.278},
+        {"at": 1.962, "cx": 500, "cy": 2230, "z": 1.15, "dur": 0.26}
+      ],
+      "lenses": [
+        {"at": 0.608, "until": 1.406, "rect": [44, 1978, 520, 70], "scale": 1.42, "dx": 150, "pad": 6},
+        {"at": 1.389, "until": 2.084, "rect": [44, 2306, 520, 70], "scale": 1.42, "dx": 150, "pad": 6},
+        {"at": 2.066, "rect": [44, 2224, 520, 70], "scale": 1.42, "dx": 150, "pad": 6}
+      ]
+    }
+  ],
+  "captions": [
+    [0.09, 0.55, "It works with"],
+    [0.61, 1.21, "*Claude* Code"],
+    [1.37, 1.77, "Cursor"],
+    [1.91, 2.57, "and *Codex*"]
+  ],
+  "seconds": 2.6333
+});
+Yap.shots();
+</script>
+</body></html>
