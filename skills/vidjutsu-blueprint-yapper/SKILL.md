@@ -1,13 +1,13 @@
 ---
-name: vidjutsu-motion-graphics-yapper
-description: Make a Motion Graphics Yapper short with VidJutsu, a 9:16 reel where a presenter talks in a window under animated graphics that show the tool, repo or library being shared, with the real page, real clicks and the tool's own demo footage, sound effects and a music bed. Use when the person asks for a Yapper, a "this tool does X" short, or a short about a resource, and has a raw talking-head take (or will record one). Recreates one proven reel near verbatim and ships the look, the kit, starter scenes and the tools. Needs the VidJutsu MCP server or CLI.
+name: vidjutsu-blueprint-yapper
+description: Make a Blueprint Yapper short with VidJutsu (say /vidjutsu-edit <take> blueprint-yapper), a 9:16 reel where a presenter talks in a window under animated graphics that show the tool, repo or library being shared, with the real page, real clicks and the tool's own demo footage, sound effects and a music bed. Use when the person asks for a Blueprint Yapper (blueprint-yapper), or for a Yapper without naming another Yapper style, a "this tool does X" short, or a short about a resource, and has a raw talking-head take (or will record one). Recreates one proven reel near verbatim and ships the look, the kit, starter scenes and the tools. Needs the VidJutsu MCP server or CLI.
 license: Apache-2.0
 metadata:
-  version: "1.1.0"
+  version: "2.0.0"
   creator: VidJutsu
 ---
 
-# Motion Graphics Yapper
+# Blueprint Yapper
 
 A 9:16 short, 30 to 50 seconds, about one resource someone can use today: a
 tool, a GitHub repo, a library of skills or prompts. The presenter talks in a
@@ -46,12 +46,12 @@ only where a step below says to.
 | [sample/script.md](sample/script.md) | The sample's script, beat by beat against the reference reel. |
 
 Watch the sample at its permanent link:
-https://github.com/Blurware/vidjutsu-skills/raw/main/skills/vidjutsu-motion-graphics-yapper/sample/sample.mp4
+https://github.com/Blurware/vidjutsu-skills/raw/main/skills/vidjutsu-blueprint-yapper/sample/sample.mp4
 (poster: the same path with `poster.jpg`). Point people at that link, not at a
 render's watch link, which expires after seven days.
 
 The starter files are also at
-`https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics-yapper/files/<path>`.
+`https://vidjutsu.ai/.well-known/skills/vidjutsu-blueprint-yapper/files/<path>`.
 
 ## Defaults
 
@@ -289,7 +289,7 @@ growing. Rects and camera points are in the still's pixels (`iw` x `ih`).
 | --- | --- |
 | `page` | `img`, `iw`, `ih` (the still and its size); `w`, `h` (the browser frame); `url` (shown in the address bar; leave out for no bar); `dark`; `cam` `[{at, cx, cy, z, dur?, ease?}]`: the image point at the view's centre and the zoom (screen px per image px), each key easing from the one before over `dur` (default 0.5 s, 0 = a cut); `push` (a slow zoom over `life` seconds, default 3%); `tilt` `{rot, dur, dy, from}` or `false` (how the window swings in); `marks` `[{at, rect or rects, kind?, dur?, until?, color?}]` with `kind` `hl` (marker highlight, the default), `strike` or `under`, several `rects` drawn one after another for a wrapped line; `lenses` `[{at, until?, rect, scale?, dx?, dy?, pad?, radius?}]`: a magnifier that lifts the region out, `scale` 1.15 to 2.3; `dim` `{at, to, until?}`: fade the rest of the page while a lens is up; `cursor` `[{at, x, y, click?, travel?}]` and `cursorUntil`: a pointer that glides (`travel` seconds) and clicks with a ring |
 | `crop` | `img`, `iw`, `ih`, `rect`, `zoom`, `rot`, `radius`, `plain`: one region of a still as a sticker that sways a little |
-| `demo` | `name` (the tool, its first word in the accent), the sheet keys from `make_sheet.py`, `cmd` (the real command, typed at `cps` characters a second), `dir` (1 or -1: which side it slides in from) |
+| `demo` | `name` (the tool, its first word in the accent), the sheet keys from `make_sheet.py`, `cmd` (the real command, typed at `cps` letters a second), `dir` (1 or -1: which side it slides in from) |
 | `odo` | `value`, `from`, `start`, `countFor`, `prefix`, `suffix`, `label`, `size`, `dark`, `star: false`, `burst: false`, `count`: a big number that counts up, then bursts into stars |
 
 Moves that work: a camera that cuts or eases between two or three points per
