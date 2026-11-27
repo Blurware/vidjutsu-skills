@@ -110,8 +110,10 @@ edge, and the head pop-out over the cards, which the reel does not do.
 ## Rules the references share
 
 1. **The resource is the hero.** One tool, repo or library per short, named
-   in the first five seconds, shown as a card (logo, repo, the install
-   command), never as a screenshot.
+   in the first five seconds and shown as itself: its real page with a camera
+   moving over it, marker highlights on the words being said, a cursor
+   clicking its real buttons, its own demo clips. A still screenshot that
+   just sits there is the one thing to avoid; every capture moves and points.
 2. **The screen changes every 1.5 to 3 seconds.** A new card, a number
    counting, a line typing, or the window stepping away. The kit's pop is a
    0.34 s scale-in with a small overshoot.

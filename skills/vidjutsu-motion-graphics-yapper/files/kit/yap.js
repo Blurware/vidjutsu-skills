@@ -455,7 +455,18 @@
       }
     };
     // render(t) may be async: the frame is taken once the head still has loaded.
-    window.render = P ? async (t) => { await loadPop(t); draw(t); } : draw;
+    // Load every kit font up front. A face is only fetched when text first uses it,
+    // so without this the first frame that shows a new font draws with a fallback
+    // and the same t looks different depending on which frames came before.
+    const fontsReady = Promise.all([...document.fonts].map((f) => f.load().catch(() => null)));
+    // Calls run one after another: a render(t) asked for while an earlier one is still
+    // waiting (fonts, a pop still) never lets the earlier one draw over it.
+    let queue = Promise.resolve();
+    window.render = (t) => {
+      const job = queue.then(async () => { await fontsReady; if (P) await loadPop(t); draw(t); });
+      queue = job.catch(() => null);
+      return job;
+    };
     window.render(0);
   };
 })();
