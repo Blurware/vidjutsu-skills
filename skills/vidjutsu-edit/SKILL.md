@@ -1,6 +1,6 @@
 ---
 name: vidjutsu-edit
-description: Edit raw footage into finished videos with VidJutsu. Use when the person says /vidjutsu-edit, or asks to edit, cut, clip or finish video (talking-head takes, a podcast, a screen recording, a long recording to cut into Shorts, Reels or TikToks) in a style. Raw footage in, finished videos out, rendered in the cloud.
+description: Edit raw footage into finished videos with VidJutsu. Use when the person says /vidjutsu-edit, or asks to edit, cut, clip or finish video (talking-head takes, a podcast, a screen recording, a long recording to cut into Shorts, Reels or TikToks) in a style, including a named style skill such as blueprint-yapper (`/vidjutsu-edit <footage> blueprint-yapper`). Raw footage in, finished videos out, rendered in the cloud.
 ---
 
 # /vidjutsu-edit
@@ -9,11 +9,15 @@ Raw footage in, finished videos out. You do the editing with VidJutsu's tools;
 VidJutsu stores the footage, keeps every edit in history and renders the
 export in the cloud. You never encode video yourself.
 
-Usage: `/vidjutsu-edit <footage> [into clips | into one video] [in <style>]`
+Usage: `/vidjutsu-edit <footage> [into clips | into one video] [in] [<style>]`
 
 - `/vidjutsu-edit ./raw/take1.mp4 ./raw/take2.mp4`
 - `/vidjutsu-edit https://.../podcast-ep12.mp4 into 5 clips for TikTok`
+- `/vidjutsu-edit ./raw/take.mp4 blueprint-yapper`
 - `/vidjutsu-edit this recording in Terminal style`
+
+A last word that isn't footage, a count or a platform, like `blueprint-yapper`,
+is the look (step 4).
 
 ## 0. Connect
 
@@ -39,10 +43,12 @@ to a video better than to questions.
 | --- | --- |
 | **Output**: one video (long form) or clips | One video. Clips when they say clips, Shorts, Reels, TikToks, or give a count. |
 | **Frame** | The footage's own frame. 9:16 for clips meant for TikTok, Reels or Shorts. |
-| **Look**: a style, a saved look, or plain | Plain. A style only when they name one or ask for a look. |
+| **Look**: a style skill, a saved look, a built-in style, or plain | Plain. A look only when they name one (`blueprint-yapper`, `in Terminal style`) or ask for one; find it with step 4. |
 
 Then follow the recipe that fits, with its steps and defaults:
 
+- a named style skill (step 4), such as **vidjutsu-blueprint-yapper**: that
+  skill is the recipe, and it wins over the ones below;
 - talking-head takes: **vidjutsu-clean-cut**
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-clean-cut/SKILL.md);
 - title cards, lower thirds, animated segments: **vidjutsu-motion-graphics**
@@ -97,18 +103,30 @@ Give each edit a one-line `summary`; it is what history shows.
 
 ## 4. Look
 
-- **A built-in style** (`styles`, then `get_style`): pass it to `render` as
-  `style {id, title?, cards?, stamps?, transitions?}`. Read its `guide`
-  first: text that doesn't fit is refused, never shrunk. Put a stamp on a
-  word by using that word's `start` from `timeline_words`.
-- **A saved look** (one the person made with vidjutsu-style): it lives in the
-  graphics workspace `style-<name>`. vidjutsu-motion-graphics starts from it
-  with new words, renders, and places the film. When they ask for a look they
-  don't have yet, make one with vidjutsu-style first.
+Find the look the person named. Try these in order and use the first match:
+
+1. **A style skill.** Named looks ship as skills. `<name>` is the skill
+   `vidjutsu-<name>` (so `blueprint-yapper` is `vidjutsu-blueprint-yapper`);
+   a name that already starts with `vidjutsu-` is used as it is. Use it if
+   it's installed; otherwise check it's listed in
+   https://vidjutsu.ai/.well-known/skills/index.json and read
+   `https://vidjutsu.ai/.well-known/skills/vidjutsu-<name>/SKILL.md` (its
+   files are under the same folder). That skill is now the recipe: follow
+   its steps, defaults, frame and checks. This skill still brings the footage
+   in (step 2) and exports (step 5).
+2. **A saved look** (one the person made with vidjutsu-style): it lives in the
+   graphics workspace `style-<name>`. vidjutsu-motion-graphics starts from it
+   with new words, renders, and places the film. When they ask for a look they
+   don't have yet, make one with vidjutsu-style first.
+3. **A built-in style** (`styles`, then `get_style`): pass it to `render` as
+   `style {id, title?, cards?, stamps?, transitions?}`. Read its `guide`
+   first: text that doesn't fit is refused, never shrunk. Put a stamp on a
+   word by using that word's `start` from `timeline_words`.
+
 - **Captions**: `render` with `captions {on: true}` when they ask, or for
-  clips meant for social feeds.
-- If the person names a look you don't have, say so in one line and use the
-  closest one; don't invent a style id.
+  clips meant for social feeds, unless the style skill sets its own.
+- If nothing matches, say so in one line, name the style skills the index
+  lists, and use the closest one; don't invent a skill or a style id.
 
 ## 5. Check, then export
 
