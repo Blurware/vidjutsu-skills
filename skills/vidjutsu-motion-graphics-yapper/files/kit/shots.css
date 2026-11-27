@@ -1,0 +1,57 @@
+/* Shots: real page captures with a camera, marks, lenses, a cursor; demo clips; a counter. */
+.s-page { position: relative; }
+.s-win { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; background: #fff;
+         box-shadow: 0 30px 70px rgba(17,18,20,0.22), 0 4px 12px rgba(17,18,20,0.10); border: 2px solid rgba(17,18,20,0.12); }
+.s-win.dark { background: #0b0d12; border-color: rgba(255,255,255,0.14); box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.3); }
+.s-bar { position: absolute; left: 0; right: 0; top: 0; height: 62px; background: #ECEDF0; border-bottom: 2px solid rgba(17,18,20,0.10);
+         display: flex; align-items: center; gap: 10px; padding: 0 22px; }
+.s-win.dark .s-bar { background: #1a1d24; border-bottom-color: rgba(255,255,255,0.08); }
+.s-bar i { width: 16px; height: 16px; border-radius: 50%; background: #C9CCD3; display: block; }
+.s-bar i:nth-child(1) { background: #FF5F57; } .s-bar i:nth-child(2) { background: #FEBC2E; } .s-bar i:nth-child(3) { background: #28C840; }
+.s-url { margin-left: 18px; flex: 1; height: 38px; border-radius: 19px; background: #fff; display: flex; align-items: center; padding: 0 18px;
+         font-family: var(--f-ui); font-size: 22px; font-weight: 500; color: #3b3d44; white-space: nowrap; overflow: hidden; }
+.s-win.dark .s-url { background: #0b0d12; color: #c9ccd3; }
+.s-url b { color: #17945A; font-weight: 700; margin-right: 8px; }
+.s-view { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.s-view > img.s-img { position: absolute; display: block; max-width: none; }
+.s-mark { position: absolute; border-radius: 7px; }
+.s-mark.hl { background: rgba(255, 213, 0, 0.62); mix-blend-mode: multiply; }
+.s-mark.hl.dk { background: rgba(46, 230, 130, 0.30); mix-blend-mode: normal; }
+.s-mark.strike { background: #E5382B; border-radius: 4px; }
+.s-mark.under { background: var(--accent); border-radius: 4px; }
+.s-dim { position: absolute; inset: 0; background: #fff; }
+.s-dim.dk { background: #05060a; }
+.s-lens { position: absolute; overflow: hidden; border-radius: 14px; background: #fff;
+          border: 4px solid var(--accent); box-shadow: 0 16px 40px rgba(17,18,20,0.30); }
+.s-lens.dk { background: #0b0d12; border-color: #2EE682; box-shadow: 0 16px 44px rgba(0,0,0,0.6); }
+.s-lens img { position: absolute; display: block; max-width: none; }
+.s-cur { position: absolute; width: 69px; height: 87px; }
+.s-cur svg { width: 69px; height: 87px; display: block; }
+.s-cur .ring { position: absolute; border-radius: 50%; border: 6px solid var(--accent); }
+
+/* a real crop used as a sticker */
+.s-crop { position: relative; overflow: hidden; border-radius: 16px; background: #fff; border: 3px solid rgba(17,18,20,0.10);
+          box-shadow: 0 18px 44px rgba(17,18,20,0.22); }
+.s-crop img { position: absolute; display: block; }
+
+/* demo: the repo's own before/after clip + the real command */
+.s-demo { width: 1000px; display: flex; flex-direction: column; align-items: center; gap: 26px; }
+.s-demo .nm { font-family: var(--f-mono); font-weight: 800; font-size: 112px; letter-spacing: -0.04em; line-height: 0.9; color: var(--ink); }
+.s-demo .nm b { color: var(--accent); font-weight: 800; }
+.s-demo .clip { position: relative; width: 980px; height: 278px; overflow: hidden; border-radius: 20px; background: #0b0d12;
+                box-shadow: 0 24px 60px rgba(17,18,20,0.28); border: 3px solid rgba(17,18,20,0.14); }
+.s-demo .clip img { position: absolute; display: block; }
+.s-demo .cmd { font-family: var(--f-mono); font-size: 43px; font-weight: 600; color: #E7E9EE; background: #15171C; padding: 18px 30px; border-radius: 16px;
+               white-space: pre; }
+.s-demo .cmd .p { color: #2EE682; } .s-demo .cmd .caret { display: inline-block; width: 20px; height: 43px; background: #E7E9EE; vertical-align: -7px; margin-left: 3px; }
+
+/* counter: a big number that counts up, with a burst */
+.s-odo { position: relative; display: flex; align-items: center; gap: 22px; font-family: var(--f-display); font-weight: 800; color: var(--ink); }
+.s-odo .num { font-size: 230px; letter-spacing: -0.05em; line-height: 0.9; font-variant-numeric: tabular-nums;
+              -webkit-text-stroke: 26px #fff; paint-order: stroke fill; }
+.s-odo.dk .num { color: #fff; -webkit-text-stroke-color: #0b0d12; }
+.s-odo .star { width: 170px; height: 170px; }
+.s-odo .lb { position: absolute; left: 0; right: 0; top: 100%; margin-top: 4px; text-align: center; font-size: 60px; letter-spacing: -0.02em;
+             -webkit-text-stroke: 16px #fff; paint-order: stroke fill; }
+.s-odo .lb .fl { -webkit-text-stroke: 16px #fff; paint-order: stroke fill; }
+.s-odo .pt { position: absolute; left: 50%; top: 50%; width: 54px; height: 54px; margin: -27px 0 0 -27px; }

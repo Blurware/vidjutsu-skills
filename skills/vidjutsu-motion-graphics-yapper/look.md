@@ -59,3 +59,14 @@ inside the edit and leans out of it.
   cuts to the next; no fade between groups.
 - **Window:** glides to full frame for the CTA in a third of a second; hides
   with a cut on card beats.
+- **Page camera:** eases (0.4 to 0.55 s, in-out cubic) or cuts between two or
+  three points per beat, with a slow 3% push in between so a hold never
+  freezes. A page window swings in from a 3 degree tilt and 90 px low.
+- **Marker:** sweeps left to right in about 0.3 s, a warm yellow on light
+  pages and a green on dark ones; a strike-through is red.
+- **Lens:** a magnifier that lifts a region out with a small overshoot
+  (0.3 s) and an accent border, often while the rest of the page dims.
+- **Cursor:** glides in 0.4 to 0.5 s and clicks with a shrinking ring; a
+  click lands on the word that names the button.
+- **Demo clip:** the tool's name slides in, its clip swings in from the other
+  side, the command types under it.

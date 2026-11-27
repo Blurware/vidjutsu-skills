@@ -85,12 +85,18 @@ body[data-look="ink"] #ground { background-image: radial-gradient(var(--grid) 2p
 
 /* ---- Stage: where cards live */
 #stage { left: 0; right: 0; }
-.card-slot { left: 50%; top: 50%; will-change: transform, opacity; }
+.card-slot { left: 50%; top: 50%; }
 
-/* ---- Caption: 1 to 3 words, between the cards and the presenter */
+/* ---- Caption: 1 to 3 words, between the cards and the presenter. No layer of
+   its own (will-change: auto): each caption scales in from 0.88, and Chrome
+   rasters a will-change layer at the scale it first draws and then only
+   stretches that bitmap, so a caption came out softer when the frame before it
+   was its first, smaller one, and the renderer refused the scene as not
+   repeatable. Without the layer it rasters at its real scale every frame. */
 #caption { left: 40px; right: 40px; text-align: center; font-family: var(--f-display); font-weight: 800;
            font-size: 76px; letter-spacing: -0.02em; line-height: 1; color: var(--cap-ink);
-           -webkit-text-stroke: 10px var(--cap-edge); paint-order: stroke fill; white-space: nowrap; }
+           -webkit-text-stroke: 10px var(--cap-edge); paint-order: stroke fill; white-space: nowrap;
+           will-change: auto; }
 #caption .fl { font-family: var(--f-flair); font-style: italic; font-weight: 400; color: var(--accent);
                font-size: 1.12em; letter-spacing: 0; -webkit-text-stroke: 0; }
 #caption .hl { color: var(--accent); }
