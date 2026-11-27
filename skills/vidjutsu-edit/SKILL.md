@@ -105,15 +105,16 @@ Give each edit a one-line `summary`; it is what history shows.
 
 Find the look the person named. Try these in order and use the first match:
 
-1. **A style skill.** Named looks ship as skills. `<name>` is the skill
-   `vidjutsu-<name>` (so `blueprint-yapper` is `vidjutsu-blueprint-yapper`);
-   a name that already starts with `vidjutsu-` is used as it is. Use it if
-   it's installed; otherwise check it's listed in
-   https://vidjutsu.ai/.well-known/skills/index.json and read
-   `https://vidjutsu.ai/.well-known/skills/vidjutsu-<name>/SKILL.md` (its
-   files are under the same folder). That skill is now the recipe: follow
-   its steps, defaults, frame and checks. This skill still brings the footage
-   in (step 2) and exports (step 5).
+1. **A style skill.** Named looks ship as skills, and the person can write
+   their own. Look for an installed skill (theirs, in the project or their
+   skills folder, or one of ours) named `<name>` or `vidjutsu-<name>`, in
+   that order, so their own wins. Not installed? `<name>` is our skill
+   `vidjutsu-<name>` (so `blueprint-yapper` is `vidjutsu-blueprint-yapper`):
+   check it's listed in https://vidjutsu.ai/.well-known/skills/index.json and
+   read `https://vidjutsu.ai/.well-known/skills/vidjutsu-<name>/SKILL.md`
+   (its files are under the same folder). That skill is now the recipe:
+   follow its steps, defaults, frame and checks. This skill still brings the
+   footage in (step 2) and exports (step 5).
 2. **A saved look** (one the person made with vidjutsu-style): it lives in the
    graphics workspace `style-<name>`. vidjutsu-motion-graphics starts from it
    with new words, renders, and places the film. When they ask for a look they
@@ -125,6 +126,9 @@ Find the look the person named. Try these in order and use the first match:
 
 - **Captions**: `render` with `captions {on: true}` when they ask, or for
   clips meant for social feeds, unless the style skill sets its own.
+- **Their own style skill**: to make one, copy a style skill's folder (such
+  as `vidjutsu-blueprint-yapper`), give it a new `name`, and change its look
+  and steps. Saved where their agent keeps skills, it is found by that name.
 - If nothing matches, say so in one line, name the style skills the index
   lists, and use the closest one; don't invent a skill or a style id.
 
