@@ -112,10 +112,15 @@ name; don't guess what it looks like.
 3. **Use the kit.** `use_style {style, workspace}` copies the kit into a new
    graphics workspace (one per video, for example `<project>-graphics`) and
    answers the starter film. Change the words in the scenes with
-   `graphics_write` `patch`. Set the film's `width` and `height` to the
-   project's frame (`show` gives `canvas`: 1920x1080 for 16:9, 1080x1920 for
-   9:16) when the style's film is drawn for the other one; a full-frame card
-   in the wrong frame is letterboxed. Then `make_graphics {workspace, film}`, poll
+   `graphics_write` `patch`. The kit's pages are laid out for the film's
+   `width` and `height`. When the project's frame (`show` gives `canvas`:
+   1920x1080 for 16:9, 1080x1920 for 9:16) is the other one, check the
+   style's `format` first: if it lists the project's ratio, the pages already
+   fit either frame and you only set `width` and `height`. If it doesn't, set
+   `width` and `height` and re-lay out each page for the new frame (stage
+   size, font sizes, positions) in the same `graphics_write`, then check a
+   still of every scene before placing it: changing the film's size alone
+   crops or squeezes the cards. Then `make_graphics {workspace, film}`, poll
    `graphics_status`, then place `output.media` with `add_media` and
    `insert_clip`. A style with `ready: false` has no kit yet: follow its guide
    with vidjutsu-motion-graphics.
