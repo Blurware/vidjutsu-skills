@@ -43,7 +43,7 @@ to a video better than to questions.
 | --- | --- |
 | **Output**: one video (long form) or clips | One video. Clips when they say clips, Shorts, Reels, TikToks, or give a count. |
 | **Frame** | The footage's own frame. 9:16 for clips meant for TikTok, Reels or Shorts. |
-| **Look**: a style skill, a saved look, a built-in style, or plain | Plain. A look only when they name one (`blueprint-yapper`, `in Terminal style`) or ask for one; find it with step 4. |
+| **Look**: a style skill, a built-in style, or plain | Plain. A look only when they name one (`blueprint-yapper`, `in Terminal style`) or ask for one; find it with step 4. |
 
 Then follow the recipe that fits, with its steps and defaults:
 
@@ -54,8 +54,7 @@ Then follow the recipe that fits, with its steps and defaults:
 - title cards, lower thirds, animated segments: **vidjutsu-motion-graphics**
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics/SKILL.md,
   with its starter files);
-- making or changing the person's own look (colors, fonts, title card, lower
-  third) and saving it: **vidjutsu-style**
+- making or changing the person's own style: **vidjutsu-style**
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-style/SKILL.md);
 - posting or scheduling the finished videos to TikTok, Instagram or YouTube:
   **vidjutsu-schedule**
@@ -115,11 +114,7 @@ Find the look the person named. Try these in order and use the first match:
    (its files are under the same folder). That skill is now the recipe:
    follow its steps, defaults, frame and checks. This skill still brings the
    footage in (step 2) and exports (step 5).
-2. **A saved look** (one the person made with vidjutsu-style): it lives in the
-   graphics workspace `style-<name>`. vidjutsu-motion-graphics starts from it
-   with new words, renders, and places the film. When they ask for a look they
-   don't have yet, make one with vidjutsu-style first.
-3. **A built-in style** (`styles`, then `get_style`): pass it to `render` as
+2. **A built-in style** (`styles`, then `get_style`): pass it to `render` as
    `style {id, title?, cards?, stamps?, transitions?}`. Read its `guide`
    first: text that doesn't fit is refused, never shrunk. Put a stamp on a
    word by using that word's `start` from `timeline_words`.
