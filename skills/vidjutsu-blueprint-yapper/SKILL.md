@@ -53,6 +53,13 @@ render's watch link, which expires after seven days.
 The starter files are also at
 `https://vidjutsu.ai/.well-known/skills/vidjutsu-blueprint-yapper/files/<path>`.
 
+Blueprint Yapper is also a VidJutsu style in every account (`styles`, id
+`blueprint-yapper`): `get_style blueprint-yapper` returns its look, guide and
+layouts, `use_style {style: "blueprint-yapper", workspace}` copies the kit
+and the starter scenes straight into a graphics workspace (no upload from
+your machine), and `apply_layout {project, style: "blueprint-yapper"}` lays
+out the presenter window.
+
 ## Defaults
 
 | Setting | Default | Meaning |

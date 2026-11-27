@@ -13,7 +13,7 @@ Usage: `/vidjutsu-edit <footage> [into clips | into one video] [in <style>]`
 
 - `/vidjutsu-edit ./raw/take1.mp4 ./raw/take2.mp4`
 - `/vidjutsu-edit https://.../podcast-ep12.mp4 into 5 clips for TikTok`
-- `/vidjutsu-edit this recording in Terminal style`
+- `/vidjutsu-edit ./raw/take.mp4 in blueprint-yapper`
 
 ## 0. Connect
 
@@ -39,7 +39,7 @@ to a video better than to questions.
 | --- | --- |
 | **Output**: one video (long form) or clips | One video. Clips when they say clips, Shorts, Reels, TikToks, or give a count. |
 | **Frame** | The footage's own frame. 9:16 for clips meant for TikTok, Reels or Shorts. |
-| **Look**: a style, a saved look, or plain | Plain. A style only when they name one or ask for a look. |
+| **Look**: a style (VidJutsu's or their own) or plain | Plain. A style only when they name one or ask for a look. |
 
 Then follow the recipe that fits, with its steps and defaults:
 
@@ -48,8 +48,8 @@ Then follow the recipe that fits, with its steps and defaults:
 - title cards, lower thirds, animated segments: **vidjutsu-motion-graphics**
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics/SKILL.md,
   with its starter files);
-- making or changing the person's own look (colors, fonts, title card, lower
-  third) and saving it: **vidjutsu-style**
+- making or changing the person's own style (colors, fonts, title card, lower
+  third) and saving it with `save_style`: **vidjutsu-style**
   (https://vidjutsu.ai/.well-known/skills/vidjutsu-style/SKILL.md);
 - posting or scheduling the finished videos to TikTok, Instagram or YouTube:
   **vidjutsu-schedule**
@@ -97,18 +97,36 @@ Give each edit a one-line `summary`; it is what history shows.
 
 ## 4. Look
 
-- **A built-in style** (`styles`, then `get_style`): pass it to `render` as
-  `style {id, title?, cards?, stamps?, transitions?}`. Read its `guide`
-  first: text that doesn't fit is refused, never shrunk. Put a stamp on a
-  word by using that word's `start` from `timeline_words`.
-- **A saved look** (one the person made with vidjutsu-style): it lives in the
-  graphics workspace `style-<name>`. vidjutsu-motion-graphics starts from it
-  with new words, renders, and places the film. When they ask for a look they
-  don't have yet, make one with vidjutsu-style first.
+A style is a named look with its method, kept in the person's VidJutsu
+account: VidJutsu's own (`global: true`) and the ones they saved. Read it by
+name; don't guess what it looks like.
+
+1. **Find it.** `styles` lists them (id, name, tagline, format, `ready`).
+   Match the name the person said to an `id`. If none fits, say so in one
+   line, list the closest, and use plain; don't invent a style id.
+2. **Read it.** `get_style {style}` returns the look (palette and fonts by
+   role), the `guide`, its `layouts`, its `kit` (the graphics files) and the
+   starter `film`. **Follow the guide step by step**: it is the method for
+   that style, and it overrides the generic steps here where they differ.
+   When a style has its own skill (vidjutsu-blueprint-yapper), use that too.
+3. **Use the kit.** `use_style {style, workspace}` copies the kit into a new
+   graphics workspace (one per video, for example `<project>-graphics`) and
+   answers the starter film. Change the words in the scenes with
+   `graphics_write` `patch`, `make_graphics {workspace, film}`, poll
+   `graphics_status`, then place `output.media` with `add_media` and
+   `insert_clip`. A style with `ready: false` has no kit yet: follow its guide
+   with vidjutsu-motion-graphics.
+4. **Lay out screen and camera** with the style's layouts:
+   `apply_layout {project, style}` (its first layout) or
+   `{project, style, preset: "<layout name>"}`.
+5. **Your part.** VidJutsu stores and draws; it makes nothing with a model.
+   Words, scripts, a cut-out of the speaker or a voice are yours to make with
+   your own tools, then `ingest` them.
+
+- **A new look**: when they ask for a look they don't have yet, make it with
+  vidjutsu-style, which saves it with `save_style`.
 - **Captions**: `render` with `captions {on: true}` when they ask, or for
   clips meant for social feeds.
-- If the person names a look you don't have, say so in one line and use the
-  closest one; don't invent a style id.
 
 ## 5. Check, then export
 
@@ -116,10 +134,10 @@ Give each edit a one-line `summary`; it is what history shows.
    fails before anyone watches.
 2. The person asked for the edit, so render without a second go-ahead: there
    is no price up front, and the render is billed after for the box time it used.
-3. `render {project, idempotency_key, height: 1080}` (plus `style` /
-   `captions`), then poll `render_status` until `succeeded`.
+3. `render {project, idempotency_key, height: 1080}` (plus `captions`),
+   then poll `render_status` until `succeeded`.
 4. Give the person each `output.watch_url`, what you cut (length before and
-   after), the look you used, and what it cost. The links last seven days and
+   after), the style you used, and what it cost. The links last seven days and
    anyone with one can open it: say so.
 
 A 402 `upgrade_required` names the plan limit and an `upgrade_url`: give

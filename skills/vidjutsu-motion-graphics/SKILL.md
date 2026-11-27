@@ -89,9 +89,10 @@ Noto Color Emoji are installed. Any other font goes in the folder with
    film.json, title/index.html and lower-third/index.html (also at
    https://vidjutsu.ai/.well-known/skills/vidjutsu-motion-graphics/files/film.json
    and the same path for the two pages).
-   When the person names a saved style (made with vidjutsu-style), start from
-   the workspace `style-<name>` instead: `graphics_read` its pages and copy
-   them, with any font or logo files by the hashes its `graphics_list` gives.
+   When the person names a style (from `styles`: VidJutsu's own or one they
+   saved with vidjutsu-style), start from it instead: `get_style` for its
+   guide, then `use_style {style, workspace}` copies its kit (pages, fonts,
+   logos) into the workspace and answers its starter film.
    `graphics_list` the workspace first: if it already has files, change those
    instead of starting over. Otherwise `graphics_write` them all as `write`
    entries in one call. For more cards of a kind, write a copy of the folder
