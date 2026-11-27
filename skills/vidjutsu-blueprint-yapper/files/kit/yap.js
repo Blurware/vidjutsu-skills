@@ -1,4 +1,4 @@
-// Motion Graphics Yapper kit: layout, captions, cards and motion.
+// Blueprint Yapper kit: layout, captions, cards and motion.
 //
 // A scene page calls Yap.scene({...}) once. It builds every element up front
 // and defines window.render(t), which sets every moving property from t alone
