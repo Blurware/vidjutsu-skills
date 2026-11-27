@@ -108,7 +108,8 @@ Find the look the person named. Try these in order and use the first match:
    their own. Look for an installed skill (theirs, in the project or their
    skills folder, or one of ours) named `<name>` or `vidjutsu-<name>`, in
    that order, so their own wins. Not installed? `<name>` is our skill
-   `vidjutsu-<name>` (so `blueprint-yapper` is `vidjutsu-blueprint-yapper`):
+   `vidjutsu-<name>` (so `blueprint-yapper` is `vidjutsu-blueprint-yapper`;
+   a name that already starts with `vidjutsu-` is used as it is):
    check it's listed in https://vidjutsu.ai/.well-known/skills/index.json and
    read `https://vidjutsu.ai/.well-known/skills/vidjutsu-<name>/SKILL.md`
    (its files are under the same folder). That skill is now the recipe:
