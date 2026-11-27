@@ -8,7 +8,7 @@ Yapper short does on screen.
 
 | # | Pattern | Length | What to take |
 | --- | --- | --- | --- |
-| 1 | Resource reveal, presenter in a selection box | 30 to 40 s | The beat order this skill uses: hook, name it, setup, mechanism, payoff, best part, free, CTA. Live counters for the payoff. |
+| 1 | Resource reveal, presenter in a selection box | 30 to 40 s | The beat order: hook, proof, what it does, the clever part, free, install, CTA. Live counters for the payoff. |
 | 2 | Light "you can now" variant | 35 to 40 s | "You can now X... completely free" hook, one card per step, before and after payoff. |
 | 3 | Window and graphics layout | about 50 s | Window at the bottom, graphics above; the window steps away so graphics take the full screen. |
 | 4 | Framework reel | 60 to 110 s | One diagram that returns for every step, then a recap. |
@@ -20,8 +20,8 @@ Yapper short does on screen.
 
 ## Pattern 1, second by second
 
-The sample recreates one pattern 1 reel (32.7 s, 9:16). This is what that reel
-does on screen, from a Gemini watch of the reel checked against a frame every
+One pattern 1 reel (32.7 s, 9:16), as a worked example of the format. This is
+what that reel does on screen, from a Gemini watch of the reel checked against a frame every
 second. Pixel positions are on a 1080x1920 frame. The resource in it is a free,
 open-source tool that plants decoy code so AI agents waste tokens trying to
 reverse-engineer an app.
@@ -98,7 +98,7 @@ reverse-engineer an app.
   over about 0.15 s). Under it: a low, steady electronic bed, and small UI
   clicks and pops on card entrances and highlights.
 
-### What the sample keeps and what it changes
+### What a recreation keeps and what it changes
 
 Keeps: the beat order and timing above, the three layouts, the selection
 handles on every card, one-word captions between the cards and the window,
@@ -131,5 +131,5 @@ edge, and the head pop-out over the cards, which the reel does not do.
 
 Keep: the beat order, each line's job and length, the hook's sentence shape,
 the pacing. Change: the resource, its facts, the keyword. The script table
-names the reference line for every beat; [sample/script.md](sample/script.md)
-is the one behind the sample, recreated from a reel of pattern 1.
+names the reference line for every beat. [sample/script.md](sample/script.md)
+is the sample's script, beat by beat with what each scene shows.

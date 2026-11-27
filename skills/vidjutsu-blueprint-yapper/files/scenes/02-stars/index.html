@@ -1,0 +1,59 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="kit/yap.css">
+<link rel="stylesheet" href="kit/shots.css">
+</head><body>
+<script src="kit/yap.js"></script>
+<script src="kit/shots.js"></script>
+<script>
+// Beat: PROOF (card). The cursor clicks the real star button, a lens pops it out, a counter counts up to the true number, then the line that says so.
+// Times are seconds inside this scene. Images (img/) are the sample's own
+// captures: replace each with your capture of your resource (capture_page.mjs,
+// make_sheet.py) and move rects and camera points to its pixels. Captions come
+// from the post-cut words: [start, end, text], 1 to 3 words, *word* = flair.
+// On a split beat add pop: {fps: 30, frames} once its pop.mov is in the folder.
+Yap.scene({
+  "layout": "card",
+  "cards": [
+    {
+      "type": "page",
+      "at": 0,
+      "until": 9,
+      "img": "img/page.png",
+      "iw": 1080,
+      "ih": 4800,
+      "w": 1000,
+      "h": 1130,
+      "y": -40,
+      "scale": 0.7692307692307692,
+      "popFrom": 1,
+      "url": "github.com/kajisho5/ffmpeg-skill",
+      "life": 2.798,
+      "tilt": {"rot": 3, "dur": 0.466},
+      "cam": [
+        {"at": 0, "cx": 540, "cy": 900, "z": 0.926},
+        {"at": 0.205, "cx": 330, "cy": 1560, "z": 2.3, "dur": 0.466}
+      ],
+      "cursor": [
+        {"at": 0.28, "x": 700, "y": 1330},
+        {"at": 0.802, "x": 56, "y": 1534, "click": true, "travel": 0.42}
+      ],
+      "cursorUntil": 1.399,
+      "dim": {"at": 0.886, "to": 0.8},
+      "lenses": [
+        {"at": 0.839, "rect": [30, 1500, 196, 54], "scale": 1.45, "dx": 205, "dy": -105, "pad": 8}
+      ]
+    },
+    {"type": "odo", "at": 0.933, "until": 9, "x": 0, "y": 120, "scale": 0.7692307692307692, "popFrom": 0.7, "from": 9000, "value": 11536, "start": 0.047, "countFor": 0.793},
+    {"type": "crop", "at": 2.201, "until": 9, "x": 0, "y": 420, "scale": 0.7692307692307692, "popFrom": 0.6, "img": "img/page.png", "iw": 1080, "ih": 4800, "rect": [83, 4464, 500, 110], "zoom": 1.55, "rot": -3, "radius": 20}
+  ],
+  "captions": [
+    [0.09, 0.59, "It's already"],
+    [0.65, 1.73, "past *eleven* thousand"],
+    [1.85, 2.67, "stars on GitHub"]
+  ],
+  "seconds": 2.7667
+});
+Yap.shots();
+</script>
+</body></html>
